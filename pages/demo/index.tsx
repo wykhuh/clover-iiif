@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import * as Form from "@radix-ui/react-form";
+import type { ViewerConfigOptions } from 'src/context/viewer-context';
 
 import Viewer from "../../docs/components/DynamicImports/Viewer"
 import { styled } from "../../src/styles/stitches.config";
@@ -20,13 +21,14 @@ function Demo() {
     setIiifContent(tempIiifContent)
   };
 
-  const options = {
-    showIIIFBadge: false,
+  const options: ViewerConfigOptions = {
+    ignoreCaptionLabels: ["Clips"],
     informationPanel: {
       renderAbout: true,
       renderSupplementing: true,
       renderClips: true
-    }
+    },
+    showIIIFBadge: false,
   }
 
   return (
