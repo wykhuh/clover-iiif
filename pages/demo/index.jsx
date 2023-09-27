@@ -4,10 +4,8 @@ import * as Form from "@radix-ui/react-form";
 import Viewer from "../../docs/components/DynamicImports/Viewer"
 import { styled } from "../../src/styles/stitches.config";
 
-
 function Demo() {
-  const defaultIiifContent =
-    "https://seagate.whirl-i-gig.com/admin/service/IIIF/manifest/ca_objects:170";
+  const defaultIiifContent = "http://localhost:3000/api/manifest-vtt-clips";
 
   const [iiifContent, setIiifContent] = useState(defaultIiifContent)
   const [tempIiifContent, setTempIiifContent] = useState(defaultIiifContent)
@@ -43,13 +41,12 @@ function Demo() {
           />
         </Form.Field>
 
-        <Form.Submit >Submit</Form.Submit >
+        <Form.Submit>Submit</Form.Submit>
       </Form.Root>
-      <Viewer iiifContent={iiifContent} options={options}/>
+      <Viewer iiifContent={iiifContent} options={options} />
     </StyledDiv>
   );
 }
-
 
 const StyledDiv = styled("div", {
   margin: "1rem auto",

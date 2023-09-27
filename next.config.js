@@ -13,6 +13,7 @@ module.exports = (phase) => {
     images: {
       unoptimized: true,
     },
-    output: "export",
+    // @TODO: For testing an API route only...uncomment later
+    //output: "export",
   });
 };
