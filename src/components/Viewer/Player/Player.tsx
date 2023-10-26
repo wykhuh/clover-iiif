@@ -140,7 +140,7 @@ const Player: React.FC<PlayerProps> = ({ allSources, resources, painting }) => {
         maxHeight: configOptions.canvasHeight,
         position: "relative",
       }}
-      data-testid="player-wrapper"
+      data-testid="clover-media-player"
     >
       <video
         id="clover-iiif-video"
