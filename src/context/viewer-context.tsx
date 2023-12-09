@@ -2,7 +2,7 @@ import React, { useReducer } from "react";
 
 import { CollectionNormalized } from "@iiif/presentation-3";
 import { IncomingHttpHeaders } from "http";
-import { Options as OpenSeadragonOptions } from "openseadragon";
+import OpenSeadragon, { Options as OpenSeadragonOptions } from "openseadragon";
 import { Vault } from "@iiif/vault";
 import { deepMerge } from "src/lib/utils";
 
@@ -59,6 +59,7 @@ export interface ViewerContextStore {
   informationOpen: boolean;
   isLoaded: boolean;
   vault: Vault;
+  openSeadragonViewer: OpenSeadragon.Viewer | null;
 }
 
 export interface ViewerAction {
@@ -70,6 +71,7 @@ export interface ViewerAction {
   isLoaded: boolean;
   manifestId: string;
   vault: Vault;
+  openSeadragonViewer: OpenSeadragon.Viewer;
 }
 
 export const defaultState: ViewerContextStore = {
@@ -81,6 +83,7 @@ export const defaultState: ViewerContextStore = {
   informationOpen: defaultConfigOptions?.informationPanel?.open,
   isLoaded: false,
   vault: new Vault(),
+  openSeadragonViewer: null,
 };
 
 const ViewerStateContext =
@@ -128,6 +131,12 @@ function viewerReducer(state: ViewerContextStore, action: ViewerAction) {
       return {
         ...state,
         isLoaded: action.isLoaded,
+      };
+    }
+    case "updateOpenSeadragonViewer": {
+      return {
+        ...state,
+        openSeadragonViewer: action.openSeadragonViewer,
       };
     }
     default: {
