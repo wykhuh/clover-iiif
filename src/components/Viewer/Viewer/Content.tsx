@@ -54,6 +54,7 @@ const ViewerContent: React.FC<Props> = ({
           isMedia={isAudioVideo}
           painting={painting}
           resources={resources}
+          annotationResources={annotationResources}
         />
 
         {isAside && (

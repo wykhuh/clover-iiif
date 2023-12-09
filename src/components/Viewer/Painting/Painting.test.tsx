@@ -32,6 +32,7 @@ const defaultProps = {
   isMedia: false,
   painting,
   resources: [],
+  annotationResources: [],
 };
 
 // Mock child components
