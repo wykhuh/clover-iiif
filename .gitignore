@@ -1,7 +1,6 @@
 # dev
 .build
 .next
-dist
 node_modules
 out
 public/script.js
@@ -9,6 +8,8 @@ public/script.js.map
 public/index.html
 coverage/
 html/
+.env.local
+tsconfig.tsbuildinfo
 
 # OS
 .DS_Store
