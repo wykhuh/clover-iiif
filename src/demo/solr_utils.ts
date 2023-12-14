@@ -1,4 +1,45 @@
-const solr = require("solr-client");
+import * as solr from "solr-client";
+
+type SolrSearchDoc = {
+  page_id: number[];
+  id: string;
+};
+
+type SolrSearch = {
+  page_id: number;
+  solr_highlighting?: string;
+};
+
+type SolrSearchDetailsDoc = {
+  id: string;
+  page_id: number[];
+  ocr_content: string[];
+};
+
+type SolrSearchDetails = {
+  page_id: number;
+  ocr_content: string;
+  solr_highlighting?: string;
+};
+
+type SolrSearchIssueDetailsDoc = {
+  issue_id: number[];
+  issue_idno: string[];
+  page_id: number[];
+  ocr_content: string[];
+};
+
+type SolrSearchIssueDetails = {
+  issue_id: number;
+  issue_idno: string;
+  page_id: number;
+  ocr_content: string;
+  solr_highlighting?: string;
+};
+
+type SolrDistinctTextDoc = {
+  text: string[];
+};
 
 //==================
 // solr
@@ -231,12 +272,12 @@ export async function searchIssueBySearchTerms(
   formattedSearchTerms: string,
   issueId: number,
   highlight: boolean,
-): Promise<{ count: number; row: SolrSearchDetails }> {
+): Promise<{ count: number; rows: SolrSearchIssueDetails[] }> {
   const query = searchIssueBySearchTermsQuery(
     client,
     formattedSearchTerms,
     issueId,
-    ["issue_id", "issue_idno", "page_id"],
+    ["issue_id", "issue_idno", "page_id", "ocr_content"],
     20,
     "ocr_content",
     highlight,
@@ -247,7 +288,7 @@ export async function searchIssueBySearchTerms(
 
   return {
     count: response["response"]["numFound"],
-    rows: response["response"]["docs"].map((row: SolrSearchDetailsDoc) => {
+    rows: response["response"]["docs"].map((row: SolrSearchIssueDetailsDoc) => {
       const data = {} as any;
 
       if (highlight) {
@@ -259,7 +300,7 @@ export async function searchIssueBySearchTerms(
 
       for (const property in row) {
         if (property != "id") {
-          data[property] = row[property as keyof SolrSearchDetailsDoc][0];
+          data[property] = row[property as keyof SolrSearchIssueDetailsDoc][0];
         }
       }
 

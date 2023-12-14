@@ -1,5 +1,11 @@
-var fs = require("fs");
-const path = require("path");
+import * as fs from "fs";
+import * as path from "path";
+
+import { type MysqlPage } from "src/demo/mysql_utils";
+
+export type TextCoordinates = {
+  [k: string]: number[][];
+};
 
 //==================
 // fetch text coordinates
@@ -7,7 +13,7 @@ const path = require("path");
 
 export function readTextCoordinatesFile(page: MysqlPage) {
   const pageFilePath = path.join(
-    process.env.DATA_DIRECTORY,
+    process.env.DATA_DIRECTORY || "",
     page["text_coordinates_file_path"].replace(".gz", ""),
   );
   return JSON.parse(fs.readFileSync(pageFilePath, "utf8"));
@@ -22,13 +28,13 @@ function createTextPositionIndexes(
   rawTextCoordinates: TextCoordinates,
 ) {
   // quoteSearchTerm_indexes: {A: [1, 3], B: [2, 4]}
-  let quoteSearchTerm_indexes = {} as { [k: string]: number[] };
+  const quoteSearchTerm_indexes = {} as { [k: string]: number[] };
   // index_distinctText: {1: A1, 2: B1, 3: A1, 4: B2}
-  let index_distinctText = {} as { [k: number]: string };
+  const index_distinctText = {} as { [k: number]: string };
   // quotedDistinctTexts: [ A1, B1, B2 ]
-  let quotedDistinctTexts = [] as string[];
+  const quotedDistinctTexts = [] as string[];
 
-  quotedSearchTerms.forEach((quotedWord, i) => {
+  quotedSearchTerms.forEach((quotedWord) => {
     ocr_texts.forEach((text) => {
       if (text.toLowerCase().includes(quotedWord.toLowerCase())) {
         quotedDistinctTexts.push(text);
@@ -65,7 +71,7 @@ function validateSequentialPageIds(
   let count = 1;
   let valid = true;
   while (count < quotedSearchTerms.length) {
-    let nextQuotedSearchTerm = quotedSearchTerms[count];
+    const nextQuotedSearchTerm = quotedSearchTerms[count];
     if (
       quoteSearchTerm_indexes[nextQuotedSearchTerm].indexOf(index + count) ===
       -1
@@ -87,7 +93,7 @@ function processSequentialSearchTerms(
 ): void {
   let count = 0;
   while (count < quotedSearchTerms.length) {
-    let currentDistinctText = index_distinctText[index + count];
+    const currentDistinctText = index_distinctText[index + count];
     if (rawTextCoordinates[currentDistinctText]) {
       rawTextCoordinates[currentDistinctText].forEach((coordinate) => {
         if (coordinate[0] == index + count) {
@@ -114,13 +120,13 @@ function findTextCoordinatesWithinGivenDistance(
   let count = 0;
 
   while (count < secondWordIndexes.length) {
-    let secondIndex = secondWordIndexes[count];
+    const secondIndex = secondWordIndexes[count];
 
     if (secondIndex > index && secondIndex < index + proximityCount + 2) {
       if (!stringIds.has(index)) {
         stringIds.add(index);
 
-        let firstCoord = rawTextCoordinates[index_distinctText[index]].find(
+        const firstCoord = rawTextCoordinates[index_distinctText[index]].find(
           (coordinate) => coordinate[0] === index,
         );
 
@@ -135,7 +141,7 @@ function findTextCoordinatesWithinGivenDistance(
       if (!stringIds.has(secondIndex)) {
         stringIds.add(secondIndex);
 
-        let secondCoord = rawTextCoordinates[
+        const secondCoord = rawTextCoordinates[
           index_distinctText[secondIndex]
         ].find((coordinate) => coordinate[0] === secondIndex);
 
@@ -169,8 +175,8 @@ function processProximitySearchTerms(
   const { quoteSearchTerm_indexes, index_distinctText } =
     createTextPositionIndexes(quotedSearchTerms, ocr_texts, rawTextCoordinates);
 
-  let firstWordIndexes = quoteSearchTerm_indexes[quotedSearchTerms[0]];
-  let secondWordIndexes = quoteSearchTerm_indexes[quotedSearchTerms[1]];
+  const firstWordIndexes = quoteSearchTerm_indexes[quotedSearchTerms[0]];
+  const secondWordIndexes = quoteSearchTerm_indexes[quotedSearchTerms[1]];
   console.log("firstWordIndexes 20 ???:", firstWordIndexes);
   console.log("secondWordIndexes 21 ???:", secondWordIndexes);
 
@@ -203,8 +209,8 @@ function proximityOrHandler(
   secondProximityCondition: string,
   proximityCount: number,
 ) {
-  let matches = {} as TextCoordinates;
-  let stringIds = new Set() as Set<number>;
+  const matches = {} as TextCoordinates;
+  const stringIds = new Set() as Set<number>;
 
   processProximitySearchTerms(
     firstProximityCondition.match(/\b[^ ]+\b/g),
@@ -234,8 +240,8 @@ function proximityAndHandler(
   secondProximityCondition: string,
   proximityCount: number,
 ) {
-  let matches = {} as TextCoordinates;
-  let stringIds = new Set() as Set<number>;
+  const matches = {} as TextCoordinates;
+  const stringIds = new Set() as Set<number>;
 
   const firstMatches = {} as TextCoordinates;
   processProximitySearchTerms(
@@ -286,8 +292,8 @@ function proximityHandler(
   firstProximityCondition: string,
   proximityCount: number,
 ) {
-  let matches = {} as TextCoordinates;
-  let stringIds = new Set() as Set<number>;
+  const matches = {} as TextCoordinates;
+  const stringIds = new Set() as Set<number>;
 
   processProximitySearchTerms(
     firstProximityCondition.match(/\b[^ ]+\b/g),
@@ -395,9 +401,9 @@ export function filterTextCoordinates(
 
     // handle quoted search terms
   } else if (quotedMatches) {
-    let matches = {} as TextCoordinates;
+    const matches = {} as TextCoordinates;
 
-    let quotedSearchTerms = quotedMatches[1].match(/\b[^ ]+\b/g);
+    const quotedSearchTerms = quotedMatches[1].match(/\b[^ ]+\b/g);
     console.log("quotedSearchTerms 0 ???:", quotedSearchTerms);
 
     if (quotedSearchTerms) {
@@ -411,11 +417,11 @@ export function filterTextCoordinates(
         rawTextCoordinates,
       );
 
-      let firstWordIndexes = quoteSearchTerm_indexes[quotedSearchTerms[0]];
+      const firstWordIndexes = quoteSearchTerm_indexes[quotedSearchTerms[0]];
       firstWordIndexes.forEach((index) => {
         // if all quoted search terms have sequential pageID, add coordinations
         // to matches object
-        let valid = validateSequentialPageIds(
+        const valid = validateSequentialPageIds(
           quotedSearchTerms as string[],
           quoteSearchTerm_indexes,
           index,
@@ -444,7 +450,7 @@ export function filterTextCoordinates(
 
     return matches;
   } else {
-    let matches = {} as TextCoordinates;
+    const matches = {} as TextCoordinates;
 
     ocr_texts.forEach((text) => {
       if (rawTextCoordinates[text]) {

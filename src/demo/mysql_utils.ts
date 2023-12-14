@@ -1,4 +1,41 @@
-const mysql = require("mysql2/promise");
+import * as mysql from "mysql2/promise";
+
+export type MysqlPage = {
+  id: number;
+  text_coordinates_file_path: string;
+  image_file_path: string;
+  pdf_file_path: string;
+  issue_id: number;
+  order: number;
+};
+
+type MysqlPageDetails = {
+  id: number;
+  text_coordinates_file_path: string;
+  image_file_path: string;
+  pdf_file_path: string;
+  issue_id: number;
+  order: number;
+  order_label: string;
+  date: string;
+  page_count: number;
+  title: string;
+};
+
+export type MysqlIssueDetails = {
+  id: number;
+  image_file_path: string;
+  pdf_file_path: string;
+  text_coordinates_file_path: string;
+  issue_id: number;
+  order: number;
+  order_label: number;
+  date: string;
+  page_count: number;
+  title: string;
+  width: number;
+  height: number;
+};
 
 //==================
 // mysql
@@ -17,16 +54,6 @@ const pool = mysql.createPool({
   enableKeepAlive: true,
   keepAliveInitialDelay: 0,
 });
-
-async function createConnection() {
-  const config = {
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    database: process.env.DB_NAME,
-    password: process.env.DB_PASSWORD,
-  };
-  return await mysql.createConnection(config);
-}
 
 //==================
 // search page
@@ -89,7 +116,7 @@ export async function getIssueById(issue_id: number) {
     [issue_id],
   );
 
-  return rows as MysqlPageDetails;
+  return rows as MysqlIssueDetails[];
 }
 
 export async function getPrevNextIssues(issue_id: number) {
