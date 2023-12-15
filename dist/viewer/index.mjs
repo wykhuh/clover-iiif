@@ -2749,7 +2749,7 @@ const Tr = ({
   items: i,
   isAudioVideo: a
 }) => {
-  const { informationOpen: l, configOptions: s } = $(), { informationPanel: c } = s, d = (c == null ? void 0 : c.renderAbout) || (c == null ? void 0 : c.renderSupplementing) && r.length > 0 || (c == null ? void 0 : c.renderAnnotation) && o.length > 0;
+  const { informationOpen: l, configOptions: s } = $(), { informationPanel: c } = s, d = (c == null ? void 0 : c.renderAbout) || (c == null ? void 0 : c.renderSupplementing) && r.length > 0 || (c == null ? void 0 : c.renderAnnotation);
   return /* @__PURE__ */ t.createElement(Me, { className: "clover-content" }, /* @__PURE__ */ t.createElement(ze, null, /* @__PURE__ */ t.createElement(
     _r,
     {
