@@ -39,8 +39,8 @@ const issues_manifests = [
         label: {
           en: ["Page 1"],
         },
-        width: 1000,
-        height: 1346,
+        width: 5868,
+        height: 7897,
         items: [
           {
             id: "annotation-page-1",
@@ -51,7 +51,7 @@ const issues_manifests = [
                 target: "page-1",
                 motivation: "painting",
                 body: {
-                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/0/0/7/46621_ca_object_representation_multifiles_media_100732_page_preview.jpg",
+                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/7/5/1/82244_ca_object_representation_multifiles_media_175194_full.jpg",
                   type: "Image",
                   format: "image/jpeg",
                   service: {
@@ -71,8 +71,8 @@ const issues_manifests = [
         label: {
           en: ["Page 2"],
         },
-        width: 1000,
-        height: 1346,
+        width: 5868,
+        height: 7897,
         items: [
           {
             id: "annotation-page-2",
@@ -83,7 +83,7 @@ const issues_manifests = [
                 target: "page-2",
                 motivation: "painting",
                 body: {
-                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/0/0/7/93070_ca_object_representation_multifiles_media_100733_page_preview.jpg",
+                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/7/5/1/29591_ca_object_representation_multifiles_media_175195_full.jpg",
                   type: "Image",
                   format: "image/jpeg",
                   service: {
@@ -103,8 +103,8 @@ const issues_manifests = [
         label: {
           en: ["Page 3"],
         },
-        width: 1000,
-        height: 1346,
+        width: 5868,
+        height: 7897,
         items: [
           {
             id: "annotation-page-3",
@@ -115,7 +115,7 @@ const issues_manifests = [
                 target: "page-3",
                 motivation: "painting",
                 body: {
-                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/0/0/7/91303_ca_object_representation_multifiles_media_100734_page_preview.jpg",
+                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/7/5/1/91986_ca_object_representation_multifiles_media_175196_full.jpg",
                   type: "Image",
                   format: "image/jpeg",
                   service: {
@@ -135,8 +135,8 @@ const issues_manifests = [
         label: {
           en: ["Page 4"],
         },
-        width: 1000,
-        height: 1346,
+        width: 5868,
+        height: 7897,
         items: [
           {
             id: "annotation-page-4",
@@ -147,7 +147,7 @@ const issues_manifests = [
                 target: "page-4",
                 motivation: "painting",
                 body: {
-                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/0/0/7/25840_ca_object_representation_multifiles_media_100735_page_preview.jpg",
+                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/7/5/1/85062_ca_object_representation_multifiles_media_175197_full.jpg",
                   type: "Image",
                   format: "image/jpeg",
                   service: {
@@ -167,8 +167,8 @@ const issues_manifests = [
         label: {
           en: ["Page 5"],
         },
-        width: 1000,
-        height: 1346,
+        width: 5868,
+        height: 7897,
         items: [
           {
             id: "annotation-page-5",
@@ -179,7 +179,7 @@ const issues_manifests = [
                 target: "page-5",
                 motivation: "painting",
                 body: {
-                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/0/0/7/56045_ca_object_representation_multifiles_media_100736_page_preview.jpg",
+                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/7/5/1/23113_ca_object_representation_multifiles_media_175198_full.jpg",
                   type: "Image",
                   format: "image/jpeg",
                   service: {
@@ -199,8 +199,8 @@ const issues_manifests = [
         label: {
           en: ["Page 6"],
         },
-        width: 1000,
-        height: 1346,
+        width: 5868,
+        height: 7897,
         items: [
           {
             id: "annotation-page-6",
@@ -211,7 +211,7 @@ const issues_manifests = [
                 target: "page-6",
                 motivation: "painting",
                 body: {
-                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/0/0/7/53246_ca_object_representation_multifiles_media_100737_page_preview.jpg",
+                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/7/5/1/41343_ca_object_representation_multifiles_media_175199_full.jpg",
                   type: "Image",
                   format: "image/jpeg",
                   service: {
@@ -231,8 +231,8 @@ const issues_manifests = [
         label: {
           en: ["Page 7"],
         },
-        width: 1000,
-        height: 1346,
+        width: 5868,
+        height: 7897,
         items: [
           {
             id: "annotation-page-7",
@@ -243,7 +243,7 @@ const issues_manifests = [
                 target: "page-7",
                 motivation: "painting",
                 body: {
-                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/0/0/7/85910_ca_object_representation_multifiles_media_100738_page_preview.jpg",
+                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/7/5/2/75291_ca_object_representation_multifiles_media_175200_full.jpg",
                   type: "Image",
                   format: "image/jpeg",
                   service: {
@@ -263,8 +263,8 @@ const issues_manifests = [
         label: {
           en: ["Page 8"],
         },
-        width: 1000,
-        height: 1346,
+        width: 5868,
+        height: 7897,
         items: [
           {
             id: "annotation-page-8",
@@ -275,7 +275,7 @@ const issues_manifests = [
                 target: "page-8",
                 motivation: "painting",
                 body: {
-                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/0/0/7/64708_ca_object_representation_multifiles_media_100739_page_preview.jpg",
+                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/7/5/2/11313_ca_object_representation_multifiles_media_175201_full.jpg",
                   type: "Image",
                   format: "image/jpeg",
                   service: {
@@ -295,8 +295,8 @@ const issues_manifests = [
         label: {
           en: ["Page 9"],
         },
-        width: 1000,
-        height: 1346,
+        width: 5868,
+        height: 7897,
         items: [
           {
             id: "annotation-page-9",
@@ -307,7 +307,7 @@ const issues_manifests = [
                 target: "page-9",
                 motivation: "painting",
                 body: {
-                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/0/0/7/56285_ca_object_representation_multifiles_media_100740_page_preview.jpg",
+                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/7/5/2/91112_ca_object_representation_multifiles_media_175202_full.jpg",
                   type: "Image",
                   format: "image/jpeg",
                   service: {
@@ -327,8 +327,8 @@ const issues_manifests = [
         label: {
           en: ["Page 10"],
         },
-        width: 1000,
-        height: 1346,
+        width: 5868,
+        height: 7897,
         items: [
           {
             id: "annotation-page-10",
@@ -339,7 +339,7 @@ const issues_manifests = [
                 target: "page-10",
                 motivation: "painting",
                 body: {
-                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/0/0/7/95827_ca_object_representation_multifiles_media_100741_page_preview.jpg",
+                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/7/5/2/67711_ca_object_representation_multifiles_media_175203_full.jpg",
                   type: "Image",
                   format: "image/jpeg",
                   service: {
@@ -359,8 +359,8 @@ const issues_manifests = [
         label: {
           en: ["Page 11"],
         },
-        width: 1000,
-        height: 1346,
+        width: 5868,
+        height: 7897,
         items: [
           {
             id: "annotation-page-11",
@@ -371,7 +371,7 @@ const issues_manifests = [
                 target: "page-11",
                 motivation: "painting",
                 body: {
-                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/0/0/7/6706_ca_object_representation_multifiles_media_100742_page_preview.jpg",
+                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/7/5/2/43919_ca_object_representation_multifiles_media_175204_full.jpg",
                   type: "Image",
                   format: "image/jpeg",
                   service: {
@@ -391,8 +391,8 @@ const issues_manifests = [
         label: {
           en: ["Page 12"],
         },
-        width: 1000,
-        height: 1346,
+        width: 5868,
+        height: 7897,
         items: [
           {
             id: "annotation-page-12",
@@ -403,7 +403,7 @@ const issues_manifests = [
                 target: "page-12",
                 motivation: "painting",
                 body: {
-                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/0/0/7/23953_ca_object_representation_multifiles_media_100743_page_preview.jpg",
+                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/7/5/2/8444_ca_object_representation_multifiles_media_175205_full.jpg",
                   type: "Image",
                   format: "image/jpeg",
                   service: {
@@ -423,8 +423,8 @@ const issues_manifests = [
         label: {
           en: ["Page 13"],
         },
-        width: 1000,
-        height: 1346,
+        width: 5868,
+        height: 7897,
         items: [
           {
             id: "annotation-page-13",
@@ -435,7 +435,7 @@ const issues_manifests = [
                 target: "page-13",
                 motivation: "painting",
                 body: {
-                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/0/0/7/47487_ca_object_representation_multifiles_media_100744_page_preview.jpg",
+                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/7/5/2/93883_ca_object_representation_multifiles_media_175206_full.jpg",
                   type: "Image",
                   format: "image/jpeg",
                   service: {
@@ -455,8 +455,8 @@ const issues_manifests = [
         label: {
           en: ["Page 14"],
         },
-        width: 1000,
-        height: 1346,
+        width: 5868,
+        height: 7897,
         items: [
           {
             id: "annotation-page-14",
@@ -467,7 +467,7 @@ const issues_manifests = [
                 target: "page-14",
                 motivation: "painting",
                 body: {
-                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/0/0/7/13725_ca_object_representation_multifiles_media_100745_page_preview.jpg",
+                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/7/5/2/19341_ca_object_representation_multifiles_media_175207_full.jpg",
                   type: "Image",
                   format: "image/jpeg",
                   service: {
@@ -487,8 +487,8 @@ const issues_manifests = [
         label: {
           en: ["Page 15"],
         },
-        width: 1000,
-        height: 1346,
+        width: 5868,
+        height: 7897,
         items: [
           {
             id: "annotation-page-15",
@@ -499,7 +499,7 @@ const issues_manifests = [
                 target: "page-15",
                 motivation: "painting",
                 body: {
-                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/0/0/7/55032_ca_object_representation_multifiles_media_100746_page_preview.jpg",
+                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/7/5/2/23941_ca_object_representation_multifiles_media_175208_full.jpg",
                   type: "Image",
                   format: "image/jpeg",
                   service: {
@@ -519,8 +519,8 @@ const issues_manifests = [
         label: {
           en: ["Page 16"],
         },
-        width: 1000,
-        height: 1346,
+        width: 5868,
+        height: 7897,
         items: [
           {
             id: "annotation-page-16",
@@ -531,7 +531,7 @@ const issues_manifests = [
                 target: "page-16",
                 motivation: "painting",
                 body: {
-                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/0/0/7/69178_ca_object_representation_multifiles_media_100747_page_preview.jpg",
+                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/7/5/2/7353_ca_object_representation_multifiles_media_175209_full.jpg",
                   type: "Image",
                   format: "image/jpeg",
                   service: {
@@ -551,8 +551,8 @@ const issues_manifests = [
         label: {
           en: ["Page 17"],
         },
-        width: 1000,
-        height: 1346,
+        width: 5868,
+        height: 7897,
         items: [
           {
             id: "annotation-page-17",
@@ -563,7 +563,7 @@ const issues_manifests = [
                 target: "page-17",
                 motivation: "painting",
                 body: {
-                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/0/0/7/2915_ca_object_representation_multifiles_media_100748_page_preview.jpg",
+                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/7/5/2/39325_ca_object_representation_multifiles_media_175210_full.jpg",
                   type: "Image",
                   format: "image/jpeg",
                   service: {
@@ -583,8 +583,8 @@ const issues_manifests = [
         label: {
           en: ["Page 18"],
         },
-        width: 1000,
-        height: 1346,
+        width: 5868,
+        height: 7897,
         items: [
           {
             id: "annotation-page-18",
@@ -595,7 +595,7 @@ const issues_manifests = [
                 target: "page-18",
                 motivation: "painting",
                 body: {
-                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/0/0/7/89923_ca_object_representation_multifiles_media_100749_page_preview.jpg",
+                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/7/5/2/34463_ca_object_representation_multifiles_media_175211_full.jpg",
                   type: "Image",
                   format: "image/jpeg",
                   service: {
@@ -615,8 +615,8 @@ const issues_manifests = [
         label: {
           en: ["Page 19"],
         },
-        width: 1000,
-        height: 1346,
+        width: 5868,
+        height: 7897,
         items: [
           {
             id: "annotation-page-19",
@@ -627,7 +627,7 @@ const issues_manifests = [
                 target: "page-19",
                 motivation: "painting",
                 body: {
-                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/0/0/7/44172_ca_object_representation_multifiles_media_100750_page_preview.jpg",
+                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/7/5/2/17089_ca_object_representation_multifiles_media_175212_full.jpg",
                   type: "Image",
                   format: "image/jpeg",
                   service: {
@@ -647,8 +647,8 @@ const issues_manifests = [
         label: {
           en: ["Page 20"],
         },
-        width: 1000,
-        height: 1346,
+        width: 5868,
+        height: 7897,
         items: [
           {
             id: "annotation-page-20",
@@ -659,7 +659,7 @@ const issues_manifests = [
                 target: "page-20",
                 motivation: "painting",
                 body: {
-                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/0/0/7/42107_ca_object_representation_multifiles_media_100751_page_preview.jpg",
+                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/7/5/2/89972_ca_object_representation_multifiles_media_175213_full.jpg",
                   type: "Image",
                   format: "image/jpeg",
                   service: {
@@ -679,8 +679,8 @@ const issues_manifests = [
         label: {
           en: ["Page 21"],
         },
-        width: 1000,
-        height: 1346,
+        width: 5868,
+        height: 7897,
         items: [
           {
             id: "annotation-page-21",
@@ -691,7 +691,7 @@ const issues_manifests = [
                 target: "page-21",
                 motivation: "painting",
                 body: {
-                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/0/0/7/62232_ca_object_representation_multifiles_media_100752_page_preview.jpg",
+                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/7/5/2/5779_ca_object_representation_multifiles_media_175214_full.jpg",
                   type: "Image",
                   format: "image/jpeg",
                   service: {
@@ -711,8 +711,8 @@ const issues_manifests = [
         label: {
           en: ["Page 22"],
         },
-        width: 1000,
-        height: 1346,
+        width: 5868,
+        height: 7897,
         items: [
           {
             id: "annotation-page-22",
@@ -723,7 +723,7 @@ const issues_manifests = [
                 target: "page-22",
                 motivation: "painting",
                 body: {
-                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/0/0/7/18077_ca_object_representation_multifiles_media_100753_page_preview.jpg",
+                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/7/5/2/97179_ca_object_representation_multifiles_media_175215_full.jpg",
                   type: "Image",
                   format: "image/jpeg",
                   service: {
@@ -743,8 +743,8 @@ const issues_manifests = [
         label: {
           en: ["Page 23"],
         },
-        width: 1000,
-        height: 1346,
+        width: 5868,
+        height: 7897,
         items: [
           {
             id: "annotation-page-23",
@@ -755,7 +755,7 @@ const issues_manifests = [
                 target: "page-23",
                 motivation: "painting",
                 body: {
-                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/0/0/7/77531_ca_object_representation_multifiles_media_100754_page_preview.jpg",
+                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/7/5/2/27518_ca_object_representation_multifiles_media_175216_full.jpg",
                   type: "Image",
                   format: "image/jpeg",
                   service: {
@@ -775,8 +775,8 @@ const issues_manifests = [
         label: {
           en: ["Page 24"],
         },
-        width: 1000,
-        height: 1346,
+        width: 5868,
+        height: 7897,
         items: [
           {
             id: "annotation-page-24",
@@ -787,7 +787,7 @@ const issues_manifests = [
                 target: "page-24",
                 motivation: "painting",
                 body: {
-                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/0/0/7/8901_ca_object_representation_multifiles_media_100755_page_preview.jpg",
+                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/7/5/2/74681_ca_object_representation_multifiles_media_175217_full.jpg",
                   type: "Image",
                   format: "image/jpeg",
                   service: {
