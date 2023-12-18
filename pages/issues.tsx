@@ -7,7 +7,7 @@ function Newspaper() {
   const [issueId, setIssueId] = useState(menuOptions[0][0]);
   const [searchTerm, setSearchTerm] = useState("grand");
 
-  const url = `http://localhost:3000/api/details/${issueId}?q=${searchTerm}`;
+  const url = `${process.env.NEXT_PUBLIC_API_BASE}manifests/${issueId}?q=${searchTerm}`;
 
   const iiifContent = url;
 

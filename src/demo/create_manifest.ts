@@ -46,7 +46,7 @@ export function editBaseManifest(
   issuePagesGroupedByPageOrder: { [k: number]: MysqlIssueDetails },
   coordinatesByPageId: { [k: number]: TextCoordinates },
 ) {
-  baseManifest.id = `http://localhost:3000/api/details/${issue_id}?q=${searchTerm}`;
+  baseManifest.id = `${process.env.NEXT_PUBLIC_API_BASE}manifests/${issue_id}?q=${searchTerm}`;
 
   baseManifest.label.en = baseManifest.label.en + ` (id: ${issue_id})`;
 
