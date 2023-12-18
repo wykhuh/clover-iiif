@@ -2,7 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getIssueById, type MysqlIssueDetails } from "src/demo/mysql_utils";
 import { editBaseManifest } from "src/demo/create_manifest";
-import { manifests } from "src/demo/ca_manifests";
+import { issueIds } from "src/demo/ca_manifests";
 import { type TextCoordinates } from "src/demo/page_files_utils";
 
 import {
@@ -33,7 +33,12 @@ export default async function handler(
   }
 
   const issue_id = Number(id);
-  const baseManifest = structuredClone(manifests[issue_id]);
+  const objectID = issueIds[issue_id];
+
+  // get manifest from CA service
+  const url = `https://grpl.whirl-i-gig.com/admin/service.php/IIIF/manifest/ca_objects:${objectID}/pretty/1/render/Newspaper`;
+  const apiResponse = await fetch(url);
+  const baseManifest = await apiResponse.json();
 
   // connect to mysql to get data for all pages in an issue
   const issue = await getIssueById(issue_id);
