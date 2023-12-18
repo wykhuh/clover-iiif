@@ -1,5 +1,5 @@
-export const manifests = {
-  4: {
+const issues_manifests = [
+  {
     "@context": "http://iiif.io/api/presentation/3/context.json",
     id: "https://grpl.whirl-i-gig.com/admin/service.php/IIIF/manifest/ca_objects:152100/pretty/1/render/Newspaper",
     type: "Manifest",
@@ -803,12 +803,12 @@ export const manifests = {
       },
     ],
   },
-  5: {
+  {
     "@context": "http://iiif.io/api/presentation/3/context.json",
-    id: "https://grpl.whirl-i-gig.com/admin/service.php/IIIF/manifest/ca_objects:153925/pretty/1/render/Newspaper",
+    id: "https://grpl.whirl-i-gig.com/admin/service.php/IIIF/manifest/ca_objects:153561/pretty/1/render/Newspaper",
     type: "Manifest",
     label: {
-      en: "Grand Rapids Herald, Saturday, January 01, 1910",
+      en: "Grand Rapids Herald, Friday, January 01, 1909",
     },
     metadata: [
       {
@@ -830,12 +830,12 @@ export const manifests = {
     ],
     thumbnail: [
       {
-        id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/3/8/7/77723_ca_object_representations_media_38775_small.jpg",
+        id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/3/8/4/38837_ca_object_representations_media_38410_small.jpg",
         type: "Image",
         format: "image/jpeg",
       },
     ],
-    navDate: "1910-01-01",
+    navDate: "1909-01-01",
     items: [
       {
         id: "page-1",
@@ -844,7 +844,7 @@ export const manifests = {
           en: ["Page 1"],
         },
         width: 1000,
-        height: 1365,
+        height: 1380,
         items: [
           {
             id: "annotation-page-1",
@@ -855,11 +855,11 @@ export const manifests = {
                 target: "page-1",
                 motivation: "painting",
                 body: {
-                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/2/4/5/45440_ca_object_representation_multifiles_media_124559_page_preview.jpg",
+                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/1/9/5/8509_ca_object_representation_multifiles_media_119598_page_preview.jpg",
                   type: "Image",
                   format: "image/jpeg",
                   service: {
-                    id: "https://grpl.whirl-i-gig.com/admin/service.php/IIIF/representation:38775:1",
+                    id: "https://grpl.whirl-i-gig.com/admin/service.php/IIIF/representation:38410:1",
                     type: "ImageService3",
                     profile: "level1",
                   },
@@ -876,7 +876,7 @@ export const manifests = {
           en: ["Page 2"],
         },
         width: 1000,
-        height: 1365,
+        height: 1380,
         items: [
           {
             id: "annotation-page-2",
@@ -887,11 +887,11 @@ export const manifests = {
                 target: "page-2",
                 motivation: "painting",
                 body: {
-                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/2/4/5/92006_ca_object_representation_multifiles_media_124560_page_preview.jpg",
+                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/1/9/5/73740_ca_object_representation_multifiles_media_119599_page_preview.jpg",
                   type: "Image",
                   format: "image/jpeg",
                   service: {
-                    id: "https://grpl.whirl-i-gig.com/admin/service.php/IIIF/representation:38775:2",
+                    id: "https://grpl.whirl-i-gig.com/admin/service.php/IIIF/representation:38410:2",
                     type: "ImageService3",
                     profile: "level1",
                   },
@@ -908,7 +908,7 @@ export const manifests = {
           en: ["Page 3"],
         },
         width: 1000,
-        height: 1365,
+        height: 1380,
         items: [
           {
             id: "annotation-page-3",
@@ -919,11 +919,11 @@ export const manifests = {
                 target: "page-3",
                 motivation: "painting",
                 body: {
-                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/2/4/5/73990_ca_object_representation_multifiles_media_124561_page_preview.jpg",
+                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/1/9/6/45358_ca_object_representation_multifiles_media_119600_page_preview.jpg",
                   type: "Image",
                   format: "image/jpeg",
                   service: {
-                    id: "https://grpl.whirl-i-gig.com/admin/service.php/IIIF/representation:38775:3",
+                    id: "https://grpl.whirl-i-gig.com/admin/service.php/IIIF/representation:38410:3",
                     type: "ImageService3",
                     profile: "level1",
                   },
@@ -940,7 +940,7 @@ export const manifests = {
           en: ["Page 4"],
         },
         width: 1000,
-        height: 1365,
+        height: 1380,
         items: [
           {
             id: "annotation-page-4",
@@ -951,11 +951,11 @@ export const manifests = {
                 target: "page-4",
                 motivation: "painting",
                 body: {
-                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/2/4/5/63205_ca_object_representation_multifiles_media_124562_page_preview.jpg",
+                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/1/9/6/49912_ca_object_representation_multifiles_media_119601_page_preview.jpg",
                   type: "Image",
                   format: "image/jpeg",
                   service: {
-                    id: "https://grpl.whirl-i-gig.com/admin/service.php/IIIF/representation:38775:4",
+                    id: "https://grpl.whirl-i-gig.com/admin/service.php/IIIF/representation:38410:4",
                     type: "ImageService3",
                     profile: "level1",
                   },
@@ -972,7 +972,7 @@ export const manifests = {
           en: ["Page 5"],
         },
         width: 1000,
-        height: 1365,
+        height: 1380,
         items: [
           {
             id: "annotation-page-5",
@@ -983,11 +983,11 @@ export const manifests = {
                 target: "page-5",
                 motivation: "painting",
                 body: {
-                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/2/4/5/75852_ca_object_representation_multifiles_media_124563_page_preview.jpg",
+                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/1/9/6/93849_ca_object_representation_multifiles_media_119602_page_preview.jpg",
                   type: "Image",
                   format: "image/jpeg",
                   service: {
-                    id: "https://grpl.whirl-i-gig.com/admin/service.php/IIIF/representation:38775:5",
+                    id: "https://grpl.whirl-i-gig.com/admin/service.php/IIIF/representation:38410:5",
                     type: "ImageService3",
                     profile: "level1",
                   },
@@ -1004,7 +1004,7 @@ export const manifests = {
           en: ["Page 6"],
         },
         width: 1000,
-        height: 1365,
+        height: 1380,
         items: [
           {
             id: "annotation-page-6",
@@ -1015,11 +1015,11 @@ export const manifests = {
                 target: "page-6",
                 motivation: "painting",
                 body: {
-                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/2/4/5/21985_ca_object_representation_multifiles_media_124564_page_preview.jpg",
+                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/1/9/6/6585_ca_object_representation_multifiles_media_119603_page_preview.jpg",
                   type: "Image",
                   format: "image/jpeg",
                   service: {
-                    id: "https://grpl.whirl-i-gig.com/admin/service.php/IIIF/representation:38775:6",
+                    id: "https://grpl.whirl-i-gig.com/admin/service.php/IIIF/representation:38410:6",
                     type: "ImageService3",
                     profile: "level1",
                   },
@@ -1036,7 +1036,7 @@ export const manifests = {
           en: ["Page 7"],
         },
         width: 1000,
-        height: 1365,
+        height: 1380,
         items: [
           {
             id: "annotation-page-7",
@@ -1047,11 +1047,11 @@ export const manifests = {
                 target: "page-7",
                 motivation: "painting",
                 body: {
-                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/2/4/5/86129_ca_object_representation_multifiles_media_124565_page_preview.jpg",
+                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/1/9/6/65983_ca_object_representation_multifiles_media_119604_page_preview.jpg",
                   type: "Image",
                   format: "image/jpeg",
                   service: {
-                    id: "https://grpl.whirl-i-gig.com/admin/service.php/IIIF/representation:38775:7",
+                    id: "https://grpl.whirl-i-gig.com/admin/service.php/IIIF/representation:38410:7",
                     type: "ImageService3",
                     profile: "level1",
                   },
@@ -1068,7 +1068,7 @@ export const manifests = {
           en: ["Page 8"],
         },
         width: 1000,
-        height: 1365,
+        height: 1380,
         items: [
           {
             id: "annotation-page-8",
@@ -1079,11 +1079,11 @@ export const manifests = {
                 target: "page-8",
                 motivation: "painting",
                 body: {
-                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/2/4/5/11112_ca_object_representation_multifiles_media_124566_page_preview.jpg",
+                  id: "https://grpl.whirl-i-gig.com/admin/media/collectiveaccess/images/1/1/9/6/49357_ca_object_representation_multifiles_media_119605_page_preview.jpg",
                   type: "Image",
                   format: "image/jpeg",
                   service: {
-                    id: "https://grpl.whirl-i-gig.com/admin/service.php/IIIF/representation:38775:8",
+                    id: "https://grpl.whirl-i-gig.com/admin/service.php/IIIF/representation:38410:8",
                     type: "ImageService3",
                     profile: "level1",
                   },
@@ -1095,7 +1095,7 @@ export const manifests = {
       },
     ],
   },
-  6: {
+  {
     "@context": "http://iiif.io/api/presentation/3/context.json",
     id: "https://grpl.whirl-i-gig.com/admin/service.php/IIIF/manifest/ca_objects:124185/pretty/1/render/Newspaper",
     type: "Manifest",
@@ -2283,7 +2283,7 @@ export const manifests = {
       },
     ],
   },
-  7: {
+  {
     "@context": "http://iiif.io/api/presentation/3/context.json",
     id: "https://grpl.whirl-i-gig.com/admin/service.php/IIIF/manifest/ca_objects:124178/pretty/1/render/Newspaper",
     type: "Manifest",
@@ -4559,7 +4559,7 @@ export const manifests = {
       },
     ],
   },
-  8: {
+  {
     "@context": "http://iiif.io/api/presentation/3/context.json",
     id: "https://grpl.whirl-i-gig.com/admin/service.php/IIIF/manifest/ca_objects:60607/pretty/1/render/Newspaper",
     type: "Manifest",
@@ -5107,7 +5107,7 @@ export const manifests = {
       },
     ],
   },
-  9: {
+  {
     "@context": "http://iiif.io/api/presentation/3/context.json",
     id: "https://grpl.whirl-i-gig.com/admin/service.php/IIIF/manifest/ca_objects:60613/pretty/1/render/Newspaper",
     type: "Manifest",
@@ -5655,7 +5655,7 @@ export const manifests = {
       },
     ],
   },
-  11: {
+  {
     "@context": "http://iiif.io/api/presentation/3/context.json",
     id: "https://grpl.whirl-i-gig.com/admin/service.php/IIIF/manifest/ca_objects:11118/pretty/1/render/Newspaper",
     type: "Manifest",
@@ -6203,4 +6203,52 @@ export const manifests = {
       },
     ],
   },
+];
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const manifestsDev = {
+  4: issues_manifests[0],
+  5: issues_manifests[1],
+  6: issues_manifests[2],
+  7: issues_manifests[3],
+  8: issues_manifests[4],
+  9: issues_manifests[5],
+  11: issues_manifests[6],
 };
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const optionsDev = [
+  [4, "Grand Rapids Herald 1905-01-01 01"],
+  [5, "Grand Rapids Herald 1909-01-01 01"],
+  [6, "Weekly Artisan 1909-07-03 01"],
+  [7, "Fine Furniture 1936-05-01 01"],
+  [8, "Woman 1908-11-21 01"],
+  [9, "Woman 1909-01-02 01"],
+  [11, "Peninsular Club 1934-11-01 01"],
+];
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const manifestsStaging = {
+  7: issues_manifests[0],
+  8: issues_manifests[1],
+  11: issues_manifests[2],
+  10: issues_manifests[3],
+  3: issues_manifests[4],
+  4: issues_manifests[5],
+  1: issues_manifests[6],
+};
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const optionsStaging = [
+  [7, "Grand Rapids Herald 1905-01-01 01"],
+  [8, "Grand Rapids Herald 1909-01-01 01"],
+  [11, "Weekly Artisan 1909-07-03 01"],
+  [10, "Fine Furniture 1936-05-01 01"],
+  [3, "Woman 1908-11-21 01"],
+  [4, "Woman 1909-01-02 01"],
+  [1, "Peninsular Club 1934-11-01 01"],
+];
+
+export const manifests = manifestsDev;
+
+export const menuOptions = optionsDev;
