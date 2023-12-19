@@ -176,12 +176,13 @@ export function searchPageBySearchTermsQuery(
 ) {
   const query = client
     .query()
-    .q(formattedSearchTerm + " AND page_id: " + pageId)
+    .q(formattedSearchTerm)
     .fl(fields)
     .rows(limit)
     .df(defaultField)
     .start(0)
-    .fq({ field: "doc_type", value: "pages" });
+    .fq({ field: "doc_type", value: "pages" })
+    .fq({ field: "page_id", value: pageId });
 
   if (highlight) {
     const highlightOptions = {
@@ -248,12 +249,13 @@ export function searchIssueBySearchTermsQuery(
 ) {
   const query = client
     .query()
-    .q(formattedSearchTerm + " AND issue_id: " + issueId)
+    .q(formattedSearchTerm)
     .fl(fields)
     .rows(limit)
     .df(defaultField)
     .start(0)
-    .fq({ field: "doc_type", value: "pages" });
+    .fq({ field: "doc_type", value: "pages" })
+    .fq({ field: "issue_id", value: issueId });
 
   if (highlight) {
     const highlightOptions = {
