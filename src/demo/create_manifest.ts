@@ -16,7 +16,7 @@ export function createSearchResultsAnnotation(pageId, coordinatesData) {
   Object.keys(filteredCoordinatesData).forEach((text, i) => {
     filteredCoordinatesData[text].forEach((coordinate, j) => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const [_stringId, h, w, y, x] = coordinate;
+      const [_stringId, x, y, w, h] = coordinate;
       const target = `${x},${y},${w},${h}`;
       annotation.items.push({
         id: `annotation_${pageId}_${i}_${j}`,
