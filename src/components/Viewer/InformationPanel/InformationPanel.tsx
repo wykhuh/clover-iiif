@@ -10,6 +10,7 @@ import {
   ViewerContextStore,
   useViewerDispatch,
   useViewerState,
+  type PluginConfig,
 } from "src/context/viewer-context";
 
 import AnnotationPage from "src/components/Viewer/InformationPanel/Annotation/Page";
@@ -22,6 +23,10 @@ import {
   CanvasNormalized,
 } from "@iiif/presentation-3";
 import { Label } from "src/components/Primitives";
+import { setupPlugins } from "src/lib/plugin-helpers";
+import ErrorFallback from "src/components/UI/ErrorFallback/ErrorFallback";
+
+import { ErrorBoundary } from "react-error-boundary";
 
 const UserScrollTimeout = 1500; // 1500ms without a user-generated scroll event reverts to auto-scrolling
 
@@ -46,10 +51,14 @@ export const InformationPanel: React.FC<NavigatorProps> = ({
   const viewerState: ViewerContextStore = useViewerState();
   const {
     isAutoScrolling,
-    configOptions: { informationPanel },
     isUserScrolling,
     vault,
+    openSeadragonViewer,
+    configOptions,
+    plugins,
+    activeManifest,
   } = viewerState;
+  const { informationPanel } = configOptions;
 
   const canvas: CanvasNormalized = vault.get({
     id: activeCanvas,
@@ -61,6 +70,33 @@ export const InformationPanel: React.FC<NavigatorProps> = ({
   const renderAbout = informationPanel?.renderAbout;
   const renderAnnotation = informationPanel?.renderAnnotation;
   const renderContentSearch = informationPanel?.renderContentSearch;
+
+  const { pluginsWithInfoPanel } = setupPlugins(plugins);
+
+  function renderPluginInformationPanel(plugin: PluginConfig, i: number) {
+    const PluginInformationPanelComponent = plugin?.informationPanel
+      ?.component as unknown as React.ElementType;
+
+    if (PluginInformationPanelComponent === undefined) {
+      return <></>;
+    }
+
+    return (
+      <Content key={i} value={plugin.id}>
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+          <PluginInformationPanelComponent
+            {...plugin?.informationPanel?.componentProps}
+            activeManifest={activeManifest}
+            canvas={canvas}
+            viewerConfigOptions={configOptions}
+            openSeadragonViewer={openSeadragonViewer}
+            useViewerDispatch={useViewerDispatch}
+            useViewerState={useViewerState}
+          />
+        </ErrorBoundary>
+      </Content>
+    );
+  }
 
   useEffect(() => {
     if (activeResource) {
@@ -84,6 +120,8 @@ export const InformationPanel: React.FC<NavigatorProps> = ({
       setActiveResource("manifest-content-search");
     } else if (annotationResources && annotationResources?.length > 0) {
       setActiveResource(annotationResources[0].id);
+    } else if (plugins.length > 0) {
+      setActiveResource(plugins[0].id);
     }
   }, [
     informationPanel?.defaultTab,
@@ -94,6 +132,7 @@ export const InformationPanel: React.FC<NavigatorProps> = ({
     annotationResources,
     contentSearchResource,
     canvas?.annotations,
+    plugins,
   ]);
 
   function handleScroll() {
@@ -140,6 +179,15 @@ export const InformationPanel: React.FC<NavigatorProps> = ({
               <Label label={resource.label as InternationalString} />
             </Trigger>
           ))}
+
+        {pluginsWithInfoPanel &&
+          pluginsWithInfoPanel.map((plugin, i) => (
+            <Trigger key={i} value={plugin.id}>
+              <Label
+                label={plugin.informationPanel?.label as InternationalString}
+              />
+            </Trigger>
+          ))}
       </List>
       <Scroll handleScroll={handleScroll}>
         {renderAbout && (
@@ -159,13 +207,16 @@ export const InformationPanel: React.FC<NavigatorProps> = ({
         )}
         {renderAnnotation &&
           annotationResources &&
-          annotationResources.map((annotationPage) => {
-            return (
-              <Content key={annotationPage.id} value={annotationPage.id}>
-                <AnnotationPage annotationPage={annotationPage} />
-              </Content>
-            );
-          })}
+          annotationResources.map((annotationPage) => (
+            <Content key={annotationPage.id} value={annotationPage.id}>
+              <AnnotationPage annotationPage={annotationPage} />
+            </Content>
+          ))}
+
+        {pluginsWithInfoPanel &&
+          pluginsWithInfoPanel.map((plugin, i) =>
+            renderPluginInformationPanel(plugin, i),
+          )}
       </Scroll>
     </Wrapper>
   );
