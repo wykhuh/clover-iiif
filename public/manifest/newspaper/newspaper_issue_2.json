@@ -65,46 +65,16 @@
               "id": "http://localhost:3000/manifest/newspaper/newspaper_issue_2-anno_p1.json-5",
               "type": "Annotation",
               "label": {
-                "en": ["Search results"]
+                "en": ["OCR Text"]
               },
-              "motivation": "highlighting",
+              "motivation": "supplementing",
               "body": {
                 "type": "TextualBody",
                 "format": "text/plain",
                 "language": "de",
-                "value": "Berliner"
+                "value": "Veniam velit Lorem elit eu sunt est consequat exercitation sunt. Pariatur aute excepteur nulla sint consectetur voluptate nostrud amet elit officia sunt. Dolor quis aute fugiat ipsum amet non. Est anim sint nostrud sunt in ut deserunt amet pariatur veniam cillum tempor enim."
               },
-              "target": "http://localhost:3000/manifest/newspaper/canvas/i2p1#xywh=184,558,1052,322"
-            },
-            {
-              "id": "http://localhost:3000/manifest/newspaper/newspaper_issue_2-anno_p1.json-6",
-              "type": "Annotation",
-              "label": {
-                "en": ["Search results"]
-              },
-              "motivation": "highlighting",
-              "body": {
-                "type": "TextualBody",
-                "format": "text/plain",
-                "language": "de",
-                "value": "Berliner"
-              },
-              "target": "http://localhost:3000/manifest/newspaper/canvas/i2p1#xywh=2123,1645,117,27"
-            },
-            {
-              "id": "http://localhost:3000/manifest/newspaper/newspaper_issue_2-anno_p1.json-7",
-              "type": "Annotation",
-              "label": {
-                "en": ["Search results"]
-              },
-              "motivation": "highlighting",
-              "body": {
-                "type": "TextualBody",
-                "format": "text/plain",
-                "language": "de",
-                "value": "Berliner"
-              },
-              "target": "http://localhost:3000/manifest/newspaper/canvas/i2p1#xywh=2399,2207,170,40"
+              "target": "http://localhost:3000/manifest/newspaper/canvas/i2p1"
             }
           ]
         }
@@ -153,35 +123,26 @@
               "id": "http://localhost:3000/manifest/newspaper/newspaper_issue_2-anno_p2.json-1",
               "type": "Annotation",
               "label": {
-                "en": ["Search results"]
+                "en": ["OCR Text"]
               },
-              "motivation": "highlighting",
+              "motivation": "supplementing",
               "body": {
                 "type": "TextualBody",
                 "format": "text/plain",
                 "language": "de",
-                "value": "Berliner"
+                "value": "Reprehenderit magna ea proident nisi velit nulla magna eu qui consequat dolor magna. Id tempor aliqua consequat ad esse veniam eiusmod cupidatat sit esse ex elit pariatur. Aliquip laborum enim eu velit anim ex pariatur magna qui nisi. Non dolore aute nisi veniam. Amet proident ad commodo irure laboris aute elit tempor ut nulla velit excepteur. Ex anim esse nulla culpa exercitation id est consectetur cupidatat aliqua pariatur ex eiusmod tempor."
               },
-              "target": "http://localhost:3000/manifest/newspaper/canvas/i2p2#xywh=1134,768,106,25"
-            },
-            {
-              "id": "http://localhost:3000/manifest/newspaper/newspaper_issue_2-anno_p2.json-2",
-              "type": "Annotation",
-              "label": {
-                "en": ["Search results"]
-              },
-              "motivation": "highlighting",
-              "body": {
-                "type": "TextualBody",
-                "format": "text/plain",
-                "language": "de",
-                "value": "Berliner"
-              },
-              "target": "http://localhost:3000/manifest/newspaper/canvas/i2p2#xywh=3301,4156,96,22"
+              "target": "http://localhost:3000/manifest/newspaper/canvas/i2p2"
             }
           ]
         }
       ]
+    }
+  ],
+  "service": [
+    {
+      "id": "http://localhost:3000/manifest/newspaper/search/2.json",
+      "type": "SearchService2"
     }
   ]
 }

@@ -67,61 +67,16 @@
               "id": "http://localhost:3000/manifest/newspaper/newspaper_issue_1-anno_p1.json-1",
               "type": "Annotation",
               "label": {
-                "en": ["Search results"]
+                "en": ["OCR Text"]
               },
-              "motivation": "highlighting",
+              "motivation": "supplementing",
               "body": {
                 "type": "TextualBody",
                 "format": "text/plain",
                 "language": "de",
-                "value": "Berliner"
+                "value": "Nisi proident tempor nostrud aliqua sunt dolore do nisi consequat aliquip laborum. Sit minim ut non mollit ullamco in ex tempor consectetur consectetur fugiat est. Eiusmod id deserunt et excepteur amet culpa in laborum dolor laborum nisi eu non. Consectetur voluptate amet duis magna ea sunt. Quis velit nostrud commodo sit adipisicing nulla consequat."
               },
-              "target": "http://localhost:3000/manifest/newspaper/canvas/i1p1#xywh=839,3259,118,27"
-            },
-            {
-              "id": "http://localhost:3000/manifest/newspaper/newspaper_issue_1-anno_p1.json-2",
-              "type": "Annotation",
-              "label": {
-                "en": ["Search results"]
-              },
-              "motivation": "highlighting",
-              "body": {
-                "type": "TextualBody",
-                "format": "text/plain",
-                "language": "de",
-                "value": "Berliner"
-              },
-              "target": "http://localhost:3000/manifest/newspaper/canvas/i1p1#xywh=161,459,1063,329"
-            },
-            {
-              "id": "http://localhost:3000/manifest/newspaper/newspaper_issue_1-anno_p1.json-3",
-              "type": "Annotation",
-              "label": {
-                "en": ["Search results"]
-              },
-              "motivation": "highlighting",
-              "body": {
-                "type": "TextualBody",
-                "format": "text/plain",
-                "language": "de",
-                "value": "Berliner"
-              },
-              "target": "http://localhost:3000/manifest/newspaper/canvas/i1p1#xywh=1942,1579,106,23"
-            },
-            {
-              "id": "http://localhost:3000/manifest/newspaper/newspaper_issue_1-anno_p1.json-4",
-              "type": "Annotation",
-              "label": {
-                "en": ["Search results"]
-              },
-              "motivation": "highlighting",
-              "body": {
-                "type": "TextualBody",
-                "format": "text/plain",
-                "language": "de",
-                "value": "„Berliner"
-              },
-              "target": "http://localhost:3000/manifest/newspaper/canvas/i1p1#xywh=1608,4429,123,25"
+              "target": "http://localhost:3000/manifest/newspaper/canvas/i1p1"
             }
           ]
         }
@@ -170,35 +125,26 @@
               "id": "http://localhost:3000/manifest/newspaper/newspaper_issue_1-anno_p2.json-1",
               "type": "Annotation",
               "label": {
-                "en": ["Search results"]
+                "en": ["OCR Text"]
               },
-              "motivation": "highlighting",
+              "motivation": "supplementing",
               "body": {
                 "type": "TextualBody",
                 "format": "text/plain",
                 "language": "de",
-                "value": "„Berliner"
+                "value": "Lorem aute eiusmod laborum irure officia deserunt duis irure nulla laborum officia. Qui qui nostrud cillum dolor ut ex non. Aute voluptate dolor deserunt veniam."
               },
-              "target": "http://localhost:3000/manifest/newspaper/canvas/i1p2#xywh=1996,3996,122,26"
-            },
-            {
-              "id": "http://localhost:3000/manifest/newspaper/newspaper_issue_1-anno_p2.json-2",
-              "type": "Annotation",
-              "label": {
-                "en": ["Search results"]
-              },
-              "motivation": "highlighting",
-              "body": {
-                "type": "TextualBody",
-                "format": "text/plain",
-                "language": "de",
-                "value": "Berliner"
-              },
-              "target": "http://localhost:3000/manifest/newspaper/canvas/i1p2#xywh=2468,4313,106,26"
+              "target": "http://localhost:3000/manifest/newspaper/canvas/i1p2"
             }
           ]
         }
       ]
+    }
+  ],
+  "service": [
+    {
+      "id": "http://localhost:3000/manifest/newspaper/search/1.json",
+      "type": "SearchService2"
     }
   ]
 }
