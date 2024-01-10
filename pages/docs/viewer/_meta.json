@@ -12,5 +12,12 @@
       "sidebar": false,
       "layout": "full"
     }
+  },
+  "newspaper": {
+    "title": "Newspaper",
+    "theme": {
+      "sidebar": false,
+      "layout": "full"
+    }
   }
 }
