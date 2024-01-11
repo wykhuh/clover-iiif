@@ -92,7 +92,9 @@ const Viewer: React.FC<ViewerProps> = ({ manifest, theme }) => {
       activeCanvas,
       "text/vtt",
     );
-    const annotationResources = getAnnotationResources(vault, activeCanvas);
+    getAnnotationResources(vault, activeCanvas).then((annotationResources) => {
+      setAnnotationResources(annotationResources);
+    });
     if (painting) {
       setIsAudioVideo(
         ["Sound", "Video"].indexOf(painting[0].type as ExternalResourceTypes) >
@@ -103,11 +105,10 @@ const Viewer: React.FC<ViewerProps> = ({ manifest, theme }) => {
       setPainting(painting);
     }
     setResources(resources);
-    setAnnotationResources(annotationResources);
     setIsInformationPanel(
       resources.length !== 0 || annotationResources.length !== 0,
     );
-  }, [activeCanvas, vault]);
+  }, [activeCanvas, vault, annotationResources.length]);
 
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>

@@ -1,6 +1,8 @@
-export const multipleHighlighting = {
+import { Manifest } from "@iiif/presentation-3";
+
+export const multipleHighlighting: Manifest = {
   "@context": ["http://iiif.io/api/presentation/3/context.json"],
-  id: "http://localhost:3000/manifest/newspaper/newspaper_issue_1.json",
+  id: "https://wykhuh.github.io/newspaper-manifest/newspaper_highlight_1.json",
   type: "Manifest",
   label: {
     de: ["1. Berliner Tageblatt - 1925-02-16"],
@@ -16,7 +18,7 @@ export const multipleHighlighting = {
   ],
   partOf: [
     {
-      id: "http://localhost:3000/manifest/newspaper/newspaper_collection.json",
+      id: "https://wykhuh.github.io/newspaper-manifest/newspaper_highlight_collection.json",
       type: "Collection",
       label: {
         de: ["Berliner Tageblatt"],
@@ -25,7 +27,7 @@ export const multipleHighlighting = {
   ],
   items: [
     {
-      id: "http://localhost:3000/manifest/newspaper/canvas/i1p1",
+      id: "https://wykhuh.github.io/newspaper-manifest/canvas/i1p1",
       type: "Canvas",
       height: 5000,
       width: 3602,
@@ -34,11 +36,11 @@ export const multipleHighlighting = {
       },
       items: [
         {
-          id: "http://localhost:3000/manifest/newspaper/annotation_page_painting/ap1",
+          id: "https://wykhuh.github.io/newspaper-manifest/annotation_page_painting/ap1",
           type: "AnnotationPage",
           items: [
             {
-              id: "http://localhost:3000/manifest/newspaper/annotation/p1",
+              id: "https://wykhuh.github.io/newspaper-manifest/annotation/p1",
               type: "Annotation",
               motivation: "painting",
               body: {
@@ -53,18 +55,18 @@ export const multipleHighlighting = {
                   },
                 ],
               },
-              target: "http://localhost:3000/manifest/newspaper/canvas/i1p1",
+              target: "https://wykhuh.github.io/newspaper-manifest/canvas/i1p1",
             },
           ],
         },
       ],
       annotations: [
         {
-          id: "http://localhost:3000/manifest/newspaper/newspaper_issue_1-anno_p1.json",
+          id: "https://wykhuh.github.io/newspaper-manifest/newspaper_issue_1-anno_p1.json",
           type: "AnnotationPage",
           items: [
             {
-              id: "http://localhost:3000/manifest/newspaper/newspaper_issue_1-anno_p1.json-1",
+              id: "https://wykhuh.github.io/newspaper-manifest/newspaper_issue_1-anno_p1.json-1",
               type: "Annotation",
               label: {
                 en: ["Search results"],
@@ -77,10 +79,10 @@ export const multipleHighlighting = {
                 value: "Berliner",
               },
               target:
-                "http://localhost:3000/manifest/newspaper/canvas/i1p1#xywh=839,3259,118,27",
+                "https://wykhuh.github.io/newspaper-manifest/canvas/i1p1#xywh=839,3259,118,27",
             },
             {
-              id: "http://localhost:3000/manifest/newspaper/newspaper_issue_1-anno_p1.json-2",
+              id: "https://wykhuh.github.io/newspaper-manifest/newspaper_issue_1-anno_p1.json-2",
               type: "Annotation",
               label: {
                 en: ["Search results"],
@@ -93,10 +95,10 @@ export const multipleHighlighting = {
                 value: "Berliner",
               },
               target:
-                "http://localhost:3000/manifest/newspaper/canvas/i1p1#xywh=161,459,1063,329",
+                "https://wykhuh.github.io/newspaper-manifest/canvas/i1p1#xywh=161,459,1063,329",
             },
             {
-              id: "http://localhost:3000/manifest/newspaper/newspaper_issue_1-anno_p1.json-3",
+              id: "https://wykhuh.github.io/newspaper-manifest/newspaper_issue_1-anno_p1.json-3",
               type: "Annotation",
               label: {
                 en: ["Search results"],
@@ -109,10 +111,10 @@ export const multipleHighlighting = {
                 value: "Berliner",
               },
               target:
-                "http://localhost:3000/manifest/newspaper/canvas/i1p1#xywh=1942,1579,106,23",
+                "https://wykhuh.github.io/newspaper-manifest/canvas/i1p1#xywh=1942,1579,106,23",
             },
             {
-              id: "http://localhost:3000/manifest/newspaper/newspaper_issue_1-anno_p1.json-4",
+              id: "https://wykhuh.github.io/newspaper-manifest/newspaper_issue_1-anno_p1.json-4",
               type: "Annotation",
               label: {
                 en: ["Search results"],
@@ -125,14 +127,14 @@ export const multipleHighlighting = {
                 value: "„Berliner",
               },
               target:
-                "http://localhost:3000/manifest/newspaper/canvas/i1p1#xywh=1608,4429,123,25",
+                "https://wykhuh.github.io/newspaper-manifest/canvas/i1p1#xywh=1608,4429,123,25",
             },
           ],
         },
       ],
     },
     {
-      id: "http://localhost:3000/manifest/newspaper/canvas/i1p2",
+      id: "https://wykhuh.github.io/newspaper-manifest/canvas/i1p2",
       type: "Canvas",
       height: 4999,
       width: 3536,
@@ -141,11 +143,11 @@ export const multipleHighlighting = {
       },
       items: [
         {
-          id: "http://localhost:3000/manifest/newspaper/annotation_page_painting/ap2",
+          id: "https://wykhuh.github.io/newspaper-manifest/annotation_page_painting/ap2",
           type: "AnnotationPage",
           items: [
             {
-              id: "http://localhost:3000/manifest/newspaper/annotation/p2",
+              id: "https://wykhuh.github.io/newspaper-manifest/annotation/p2",
               type: "Annotation",
               motivation: "painting",
               body: {
@@ -160,18 +162,18 @@ export const multipleHighlighting = {
                   },
                 ],
               },
-              target: "http://localhost:3000/manifest/newspaper/canvas/i1p2",
+              target: "https://wykhuh.github.io/newspaper-manifest/canvas/i1p2",
             },
           ],
         },
       ],
       annotations: [
         {
-          id: "http://localhost:3000/manifest/newspaper/newspaper_issue_1-anno_p2.json",
+          id: "https://wykhuh.github.io/newspaper-manifest/newspaper_issue_1-anno_p2.json",
           type: "AnnotationPage",
           items: [
             {
-              id: "http://localhost:3000/manifest/newspaper/newspaper_issue_1-anno_p2.json-1",
+              id: "https://wykhuh.github.io/newspaper-manifest/newspaper_issue_1-anno_p2.json-1",
               type: "Annotation",
               label: {
                 en: ["Search results"],
@@ -184,10 +186,10 @@ export const multipleHighlighting = {
                 value: "„Berliner",
               },
               target:
-                "http://localhost:3000/manifest/newspaper/canvas/i1p2#xywh=1996,3996,122,26",
+                "https://wykhuh.github.io/newspaper-manifest/canvas/i1p2#xywh=1996,3996,122,26",
             },
             {
-              id: "http://localhost:3000/manifest/newspaper/newspaper_issue_1-anno_p2.json-2",
+              id: "https://wykhuh.github.io/newspaper-manifest/newspaper_issue_1-anno_p2.json-2",
               type: "Annotation",
               label: {
                 en: ["Search results"],
@@ -200,7 +202,7 @@ export const multipleHighlighting = {
                 value: "Berliner",
               },
               target:
-                "http://localhost:3000/manifest/newspaper/canvas/i1p2#xywh=2468,4313,106,26",
+                "https://wykhuh.github.io/newspaper-manifest/canvas/i1p2#xywh=2468,4313,106,26",
             },
           ],
         },
@@ -209,7 +211,7 @@ export const multipleHighlighting = {
   ],
 };
 
-export const simpleAnnotations = {
+export const simpleAnnotations: Manifest = {
   "@context": "http://iiif.io/api/presentation/3/context.json",
   id: "https://iiif.io/api/cookbook/recipe/0266-full-canvas-annotation/manifest.json",
   type: "Manifest",
@@ -276,7 +278,7 @@ export const simpleAnnotations = {
   ],
 };
 
-export const simpleTagging = {
+export const simpleTagging: Manifest = {
   "@context": "http://iiif.io/api/presentation/3/context.json",
   id: "https://iiif.io/api/cookbook/recipe/0021-tagging/manifest.json",
   type: "Manifest",
@@ -343,7 +345,7 @@ export const simpleTagging = {
   ],
 };
 
-export const nonRectangularPolygon = {
+export const nonRectangularPolygon: Manifest = {
   "@context": "http://iiif.io/api/presentation/3/context.json",
   id: "https://iiif.io/api/cookbook/recipe/0261-non-rectangular-commenting/manifest.json",
   type: "Manifest",
@@ -418,7 +420,7 @@ export const nonRectangularPolygon = {
   ],
 };
 
-export const imagesAnnotations = {
+export const imagesAnnotations: Manifest = {
   "@context": "http://iiif.io/api/presentation/3/context.json",
   id: "https://iiif.io/api/cookbook/recipe/0377-image-in-annotation/manifest.json",
   type: "Manifest",
@@ -486,6 +488,58 @@ export const imagesAnnotations = {
                 "https://iiif.io/api/cookbook/recipe/0377-image-in-annotation/canvas-1#xywh=138,550,1477,1710",
             },
           ],
+        },
+      ],
+    },
+  ],
+};
+
+export const referencedAnnotations: Manifest = {
+  "@context": "http://iiif.io/api/presentation/3/context.json",
+  id: "https://iiif.io/api/cookbook/recipe/0269-embedded-or-referenced-annotations/manifest.json",
+  type: "Manifest",
+  label: {
+    en: ["Picture of Göttingen taken during the 2019 IIIF Conference"],
+  },
+  items: [
+    {
+      id: "https://iiif.io/api/cookbook/recipe/0269-embedded-or-referenced-annotations/canvas-1",
+      type: "Canvas",
+      height: 3024,
+      width: 4032,
+      items: [
+        {
+          id: "https://iiif.io/api/cookbook/recipe/0269-embedded-or-referenced-annotations/canvas-1/annopage-1",
+          type: "AnnotationPage",
+          items: [
+            {
+              id: "https://iiif.io/api/cookbook/recipe/0269-embedded-or-referenced-annotations/canvas-1/annopage-1/anno-1",
+              type: "Annotation",
+              motivation: "painting",
+              body: {
+                id: "https://iiif.io/api/image/3.0/example/reference/918ecd18c2592080851777620de9bcb5-gottingen/full/max/0/default.jpg",
+                type: "Image",
+                format: "image/jpeg",
+                height: 3024,
+                width: 4032,
+                service: [
+                  {
+                    id: "https://iiif.io/api/image/3.0/example/reference/918ecd18c2592080851777620de9bcb5-gottingen",
+                    profile: "level1",
+                    type: "ImageService3",
+                  },
+                ],
+              },
+              target:
+                "https://iiif.io/api/cookbook/recipe/0269-embedded-or-referenced-annotations/canvas-1",
+            },
+          ],
+        },
+      ],
+      annotations: [
+        {
+          id: "https://iiif.io/api/cookbook/recipe/0269-embedded-or-referenced-annotations/annotationpage.json",
+          type: "AnnotationPage",
         },
       ],
     },

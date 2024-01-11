@@ -6,6 +6,7 @@ import {
   simpleTagging,
   nonRectangularPolygon,
   imagesAnnotations,
+  referencedAnnotations,
 } from "src/fixtures/use-iiif/get-annotation-resources";
 import {
   manifestNoAnnotations,
@@ -15,11 +16,11 @@ import {
 describe("getAnnotationResources method", () => {
   it("processes manifest with simple annotations", async () => {
     const vault = new Vault();
-    await vault.loadManifest("", simpleAnnotations);
+    await vault.loadManifest(simpleAnnotations);
 
-    const result = getAnnotationResources(
+    const result = await getAnnotationResources(
       vault,
-      "https://iiif.io/api/cookbook/recipe/0266-full-canvas-annotation/canvas-1",
+      simpleAnnotations.items[0].id,
     );
 
     const expected = [
@@ -50,11 +51,11 @@ describe("getAnnotationResources method", () => {
 
   it("processes manifest with simple tagging annotations", async () => {
     const vault = new Vault();
-    await vault.loadManifest("", simpleTagging);
+    await vault.loadManifest(simpleTagging);
 
-    const result = getAnnotationResources(
+    const result = await getAnnotationResources(
       vault,
-      "https://iiif.io/api/cookbook/recipe/0021-tagging/canvas/p1",
+      simpleTagging.items[0].id,
     );
 
     const expected = [
@@ -84,11 +85,11 @@ describe("getAnnotationResources method", () => {
 
   it("processes manifest with non-rectangular polygon annotations", async () => {
     const vault = new Vault();
-    await vault.loadManifest("", nonRectangularPolygon);
+    await vault.loadManifest(nonRectangularPolygon);
 
-    const result = getAnnotationResources(
+    const result = await getAnnotationResources(
       vault,
-      "https://iiif.io/api/cookbook/recipe/0261-non-rectangular-commenting/canvas/p1",
+      nonRectangularPolygon.items[0].id,
     );
 
     const expected = [
@@ -126,11 +127,11 @@ describe("getAnnotationResources method", () => {
 
   it("processes manifest with multiple highlighting annotations", async () => {
     const vault = new Vault();
-    await vault.loadManifest("", multipleHighlighting);
+    await vault.loadManifest(multipleHighlighting);
 
-    const result = getAnnotationResources(
+    const result = await getAnnotationResources(
       vault,
-      "http://localhost:3000/manifest/newspaper/canvas/i1p1",
+      multipleHighlighting.items[0].id,
     );
 
     const expected = [
@@ -150,7 +151,7 @@ describe("getAnnotationResources method", () => {
               value: "Berliner",
             },
             target:
-              "http://localhost:3000/manifest/newspaper/canvas/i1p1#xywh=839,3259,118,27",
+              "https://wykhuh.github.io/newspaper-manifest/canvas/i1p1#xywh=839,3259,118,27",
           },
           {
             body: {
@@ -161,7 +162,7 @@ describe("getAnnotationResources method", () => {
               value: "Berliner",
             },
             target:
-              "http://localhost:3000/manifest/newspaper/canvas/i1p1#xywh=161,459,1063,329",
+              "https://wykhuh.github.io/newspaper-manifest/canvas/i1p1#xywh=161,459,1063,329",
           },
           {
             body: {
@@ -172,7 +173,7 @@ describe("getAnnotationResources method", () => {
               value: "Berliner",
             },
             target:
-              "http://localhost:3000/manifest/newspaper/canvas/i1p1#xywh=1942,1579,106,23",
+              "https://wykhuh.github.io/newspaper-manifest/canvas/i1p1#xywh=1942,1579,106,23",
           },
           {
             body: {
@@ -183,7 +184,7 @@ describe("getAnnotationResources method", () => {
               value: "„Berliner",
             },
             target:
-              "http://localhost:3000/manifest/newspaper/canvas/i1p1#xywh=1608,4429,123,25",
+              "https://wykhuh.github.io/newspaper-manifest/canvas/i1p1#xywh=1608,4429,123,25",
           },
         ],
       },
@@ -193,11 +194,11 @@ describe("getAnnotationResources method", () => {
 
   it("processes manifest with images in the annotations", async () => {
     const vault = new Vault();
-    await vault.loadManifest("", imagesAnnotations);
+    await vault.loadManifest(imagesAnnotations);
 
-    const result = getAnnotationResources(
+    const result = await getAnnotationResources(
       vault,
-      "https://iiif.io/api/cookbook/recipe/0377-image-in-annotation/canvas-1",
+      imagesAnnotations.items[0].id,
     );
 
     const expected = [
@@ -232,13 +233,47 @@ describe("getAnnotationResources method", () => {
     expect(result).toStrictEqual(expected);
   });
 
+  it("process manifest with referenced annotation page", async () => {
+    const vault = new Vault();
+    await vault.loadManifest(referencedAnnotations);
+
+    const result = await getAnnotationResources(
+      vault,
+      referencedAnnotations.items[0].id,
+    );
+
+    const expected = [
+      {
+        id: "Annotation",
+        items: [
+          {
+            body: {
+              format: "text/plain",
+              id: "vault://929e073a",
+              language: "de",
+              type: "TextualBody",
+              value: "Göttinger Marktplatz mit Gänseliesel Brunnen",
+            },
+            target:
+              "https://iiif.io/api/cookbook/recipe/0269-embedded-or-referenced-annotations/canvas-1",
+          },
+        ],
+        label: {
+          en: ["Annotation"],
+        },
+        motivation: "commenting",
+      },
+    ];
+    expect(result).toStrictEqual(expected);
+  });
+
   it("returns an empty array if there are no annotations", async () => {
     const vault = new Vault();
-    await vault.loadManifest("", manifestNoAnnotations);
+    await vault.loadManifest(manifestNoAnnotations);
 
-    const result = getAnnotationResources(
+    const result = await getAnnotationResources(
       vault,
-      "https://api.dc.library.northwestern.edu/api/v2/works/57446da0-dc8b-4be6-998d-efb67c71f654?as=iiif/canvas/access/0",
+      manifestNoAnnotations.items[0].id,
     );
 
     expect(result).toHaveLength(0);
@@ -246,12 +281,9 @@ describe("getAnnotationResources method", () => {
 
   it("returns an empty array if manifest has supplementing motivation", async () => {
     const vault = new Vault();
-    await vault.loadManifest("", vttManifest);
+    await vault.loadManifest(vttManifest);
 
-    const result = getAnnotationResources(
-      vault,
-      "https://iiif.stack.rdc-staging.library.northwestern.edu/public/iiif3/9d/67/f8/c5/-1/a2/e-/4f/bd/-8/47/1-/4a/1a/fa/7d/6e/5a-manifest.json/canvas/ca6a621f-d3dd-43b2-8aed-40fdfda4c024",
-    );
+    const result = await getAnnotationResources(vault, vttManifest.items[0].id);
 
     expect(result).toHaveLength(0);
   });

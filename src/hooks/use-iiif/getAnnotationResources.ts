@@ -20,10 +20,17 @@ export type LabeledAnnotationedResource = {
   items: FormattedAnnotationItem[];
 };
 
-export const getAnnotationResources = (
+type GroupedResource = {
+  body: AnnotationBody | AnnotationBody[] | undefined;
+  target: AnnotationTarget | AnnotationTarget[] | undefined;
+  motivation: string | string[] | undefined;
+  localizedLabel: InternationalString;
+};
+
+export const getAnnotationResources = async (
   vault: any,
   activeCanvas: string,
-): Array<LabeledAnnotationedResource> => {
+): Promise<LabeledAnnotationedResource[]> => {
   const canvas: CanvasNormalized = vault.get({
     id: activeCanvas,
     type: "Canvas",
@@ -33,9 +40,22 @@ export const getAnnotationResources = (
 
   const annotationPage: AnnotationPage = vault.get(canvas.annotations[0]);
 
-  const annotations: Annotation[] = vault.get(annotationPage.items);
-  if (!Array.isArray(annotations)) return [];
+  if (!annotationPage.items) return [];
 
+  let annotations: Annotation[] = [];
+  // handle embedded annotations
+  if (annotationPage.items.length > 0) {
+    annotations = vault.get(annotationPage.items);
+    // handle referenced annotations that are in a separate AnnotationPage
+  } else {
+    const annotationPageReferenced = await vault.load(annotationPage.id);
+    annotations = vault.get(annotationPageReferenced.items);
+  }
+
+  return formatAnnotations(vault, annotations);
+};
+
+function formatAnnotations(vault: any, annotations: Annotation[]) {
   const filteredAnnotations = annotations.filter((annotation) => {
     if (!annotation.body) return;
     if (annotation.motivation?.includes("supplementing")) return;
@@ -69,12 +89,6 @@ export const getAnnotationResources = (
     return annotation;
   });
 
-  type GroupedResource = {
-    body: AnnotationBody | AnnotationBody[] | undefined;
-    target: AnnotationTarget | AnnotationTarget[] | undefined;
-    motivation: string | string[] | undefined;
-    localizedLabel: InternationalString;
-  };
   const groupedResources = {} as { [k: string]: GroupedResource[] };
   filteredAnnotations.forEach((annotation) => {
     const localizedLabel = annotation.label || { en: ["Annotation"] };
@@ -110,4 +124,4 @@ export const getAnnotationResources = (
   }
 
   return results;
-};
+}
