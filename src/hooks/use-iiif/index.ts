@@ -4,7 +4,10 @@ import { getLabel } from "src/hooks/use-iiif/getLabel";
 import { getPaintingResource } from "src/hooks/use-iiif/getPaintingResource";
 import { getSupplementingResources } from "src/hooks/use-iiif/getSupplementingResources";
 import { getThumbnail } from "src/hooks/use-iiif/getThumbnail";
-import { getAnnotationResources } from "src/hooks/use-iiif/getAnnotationResources";
+import {
+  getAnnotationResources,
+  getSearchContentResources,
+} from "src/hooks/use-iiif/getAnnotationResources";
 
 export {
   getAccompanyingCanvasImage,
@@ -14,4 +17,5 @@ export {
   getSupplementingResources,
   getThumbnail,
   getAnnotationResources,
+  getSearchContentResources,
 };

@@ -8,9 +8,12 @@ import {
   IIIFExternalWebResource,
   InternationalString,
 } from "@iiif/presentation-3";
+import { Vault } from "@iiif/vault";
 
 export type FormattedAnnotationItem = {
-  [k: string]: any;
+  target: string;
+  body: AnnotationBody[] | AnnotationBody;
+  canvas?: string;
 };
 
 export type LabeledAnnotationedResource = {
@@ -18,6 +21,13 @@ export type LabeledAnnotationedResource = {
   label: InternationalString;
   motivation: string | string[] | undefined;
   items: FormattedAnnotationItem[];
+};
+
+export type LabeledSourceContentResource = {
+  id: string;
+  label: InternationalString;
+  motivation: string | undefined;
+  items: { [k: string]: FormattedAnnotationItem[] };
 };
 
 type GroupedResource = {
@@ -126,3 +136,56 @@ function formatAnnotations(vault: any, annotations: Annotation[]) {
 
   return results;
 }
+
+export const getSearchContentResources = async (
+  annotationPage: AnnotationPage,
+  canvasLabelObj: { [k: string]: string },
+): Promise<LabeledSourceContentResource> => {
+  if (annotationPage["@context"] !== "http://iiif.io/api/search/2/context.json")
+    return {} as LabeledSourceContentResource;
+  if (!annotationPage.items) return {} as LabeledSourceContentResource;
+
+  const vault = new Vault();
+  await vault.loadManifest(annotationPage);
+  const annotations: Annotation[] = vault.get(annotationPage.items);
+
+  annotations.forEach((annotation) => {
+    if (!annotation.body) return;
+
+    const annotationBody = annotation.body as ContentResource[];
+    if (Array.isArray(annotationBody)) {
+      if (annotationBody.length === 1) {
+        const resource = vault.get(annotationBody[0]) as AnnotationBody;
+        annotation.body = resource;
+      }
+    }
+  });
+
+  const data = {
+    id: "Search Results",
+    label: { en: ["Search Results"] },
+    motivation: annotations[0].motivation && annotations[0].motivation[0],
+    items: {},
+  };
+
+  annotations.forEach((annotation) => {
+    const target = annotation.target;
+    if (target && typeof target === "string") {
+      const canvasId = Object.keys(canvasLabelObj).find((canvasId) =>
+        target.startsWith(canvasId),
+      );
+      if (canvasId) {
+        if (!data.items[canvasLabelObj[canvasId]]) {
+          data.items[canvasLabelObj[canvasId]] = [];
+        }
+        data.items[canvasLabelObj[canvasId]].push({
+          target: annotation.target,
+          body: annotation.body,
+          canvas: canvasId,
+        });
+      }
+    }
+  });
+
+  return data;
+};

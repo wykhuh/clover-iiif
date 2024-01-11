@@ -1,5 +1,10 @@
 import { Vault } from "@iiif/vault";
-import { getAnnotationResources } from "./getAnnotationResources";
+import {
+  getAnnotationResources,
+  getSearchContentResources,
+  LabeledAnnotationedResource,
+  LabeledSourceContentResource,
+} from "./getAnnotationResources";
 import {
   multipleHighlighting,
   simpleAnnotations,
@@ -7,11 +12,13 @@ import {
   nonRectangularPolygon,
   imagesAnnotations,
   referencedAnnotations,
+  searchContent,
 } from "src/fixtures/use-iiif/get-annotation-resources";
 import {
   manifestNoAnnotations,
   vttManifest,
 } from "src/fixtures/use-iiif/get-supplementing-resources";
+import { AnnotationPage } from "@iiif/presentation-3";
 
 describe("getAnnotationResources method", () => {
   it("processes manifest with simple annotations", async () => {
@@ -23,7 +30,7 @@ describe("getAnnotationResources method", () => {
       simpleAnnotations.items[0].id,
     );
 
-    const expected = [
+    const expected: LabeledAnnotationedResource[] = [
       {
         id: "Annotation",
         label: {
@@ -58,7 +65,7 @@ describe("getAnnotationResources method", () => {
       simpleTagging.items[0].id,
     );
 
-    const expected = [
+    const expected: LabeledAnnotationedResource[] = [
       {
         id: "Annotation",
         label: {
@@ -92,7 +99,7 @@ describe("getAnnotationResources method", () => {
       nonRectangularPolygon.items[0].id,
     );
 
-    const expected = [
+    const expected: LabeledAnnotationedResource[] = [
       {
         id: "Annotation",
         label: {
@@ -134,7 +141,7 @@ describe("getAnnotationResources method", () => {
       multipleHighlighting.items[0].id,
     );
 
-    const expected = [
+    const expected: LabeledAnnotationedResource[] = [
       {
         id: "Search results",
         label: {
@@ -201,7 +208,7 @@ describe("getAnnotationResources method", () => {
       imagesAnnotations.items[0].id,
     );
 
-    const expected = [
+    const expected: LabeledAnnotationedResource[] = [
       {
         id: "Annotation",
         items: [
@@ -242,7 +249,7 @@ describe("getAnnotationResources method", () => {
       referencedAnnotations.items[0].id,
     );
 
-    const expected = [
+    const expected: LabeledAnnotationedResource[] = [
       {
         id: "Annotation",
         items: [
@@ -286,5 +293,97 @@ describe("getAnnotationResources method", () => {
     const result = await getAnnotationResources(vault, vttManifest.items[0].id);
 
     expect(result).toHaveLength(0);
+  });
+});
+
+describe("getSearchContentResources", () => {
+  const canvasLabelObj = {
+    "https://wykhuh.github.io/newspaper-manifest/canvas/i1p1": "Page 1",
+    "https://wykhuh.github.io/newspaper-manifest/canvas/i1p2": "Page 2",
+  };
+
+  it("processes search content AnnotationPage manifest", async () => {
+    const result = await getSearchContentResources(
+      searchContent,
+      canvasLabelObj,
+    );
+
+    const expected: LabeledSourceContentResource = {
+      id: "Search Results",
+      items: {
+        "Page 1": [
+          {
+            body: {
+              format: "text/plain",
+              id: "vault://91a5bffd",
+              type: "TextualBody",
+              value: "Berliner",
+            },
+            canvas: "https://wykhuh.github.io/newspaper-manifest/canvas/i1p1",
+            target:
+              "https://wykhuh.github.io/newspaper-manifest/canvas/i1p1#xywh=839,3259,118,27",
+          },
+          {
+            body: {
+              format: "text/plain",
+              id: "vault://91a5bffd",
+              type: "TextualBody",
+              value: "Berliner",
+            },
+            canvas: "https://wykhuh.github.io/newspaper-manifest/canvas/i1p1",
+            target:
+              "https://wykhuh.github.io/newspaper-manifest/canvas/i1p1#xywh=161,459,1063,329",
+          },
+        ],
+        "Page 2": [
+          {
+            body: {
+              format: "text/plain",
+              id: "vault://91a5bffd",
+              type: "TextualBody",
+              value: "Berliner",
+            },
+            canvas: "https://wykhuh.github.io/newspaper-manifest/canvas/i1p2",
+            target:
+              "https://wykhuh.github.io/newspaper-manifest/canvas/i1p2#xywh=2468,4313,106,26",
+          },
+        ],
+      },
+      label: {
+        en: ["Search Results"],
+      },
+      motivation: "highlighting",
+    };
+    expect(result).toStrictEqual(expected);
+  });
+
+  it("returns empty object if no items", async () => {
+    const annotationPage: AnnotationPage = {
+      "@context": "http://iiif.io/api/search/2/context.json",
+      id: "https://wykhuh.github.io/newspaper-manifest/newspaper_search_content_1.json",
+      type: "AnnotationPage",
+    };
+
+    const result = await getSearchContentResources(
+      annotationPage,
+      canvasLabelObj,
+    );
+
+    expect(result).toStrictEqual({});
+  });
+
+  it("returns empty object if content is not search content v2", async () => {
+    const annotationPage: AnnotationPage = {
+      "@context": "http://iiif.io/api/presentation/3/context.json",
+      id: "https://wykhuh.github.io/newspaper-manifest/newspaper_search_content_1.json",
+      type: "AnnotationPage",
+    };
+
+    const result = await getSearchContentResources(
+      annotationPage,
+      canvasLabelObj,
+    );
+
+    expect(result).toStrictEqual({});
   });
 });

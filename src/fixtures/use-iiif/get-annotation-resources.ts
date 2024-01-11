@@ -1,4 +1,4 @@
-import { Manifest } from "@iiif/presentation-3";
+import { Manifest, AnnotationPage } from "@iiif/presentation-3";
 
 export const multipleHighlighting: Manifest = {
   "@context": ["http://iiif.io/api/presentation/3/context.json"],
@@ -542,6 +542,59 @@ export const referencedAnnotations: Manifest = {
           type: "AnnotationPage",
         },
       ],
+    },
+  ],
+};
+
+export const searchContent: AnnotationPage = {
+  "@context": "http://iiif.io/api/search/2/context.json",
+  id: "https://wykhuh.github.io/newspaper-manifest/newspaper_search_content_1.json",
+  type: "AnnotationPage",
+  items: [
+    {
+      id: "https://wykhuh.github.io/newspaper-manifest/annotation/584",
+      type: "Annotation",
+      motivation: "highlighting",
+      label: {
+        en: ["Search results"],
+      },
+      body: {
+        type: "TextualBody",
+        value: "Berliner",
+        format: "text/plain",
+      },
+      target:
+        "https://wykhuh.github.io/newspaper-manifest/canvas/i1p1#xywh=839,3259,118,27",
+    },
+    {
+      id: "https://wykhuh.github.io/newspaper-manifest/annotation/920",
+      type: "Annotation",
+      motivation: "highlighting",
+      label: {
+        en: ["Search results"],
+      },
+      body: {
+        type: "TextualBody",
+        value: "Berliner",
+        format: "text/plain",
+      },
+      target:
+        "https://wykhuh.github.io/newspaper-manifest/canvas/i1p1#xywh=161,459,1063,329",
+    },
+    {
+      id: "https://wykhuh.github.io/newspaper-manifest/annotation/2650",
+      type: "Annotation",
+      motivation: "highlighting",
+      label: {
+        en: ["Search results"],
+      },
+      body: {
+        type: "TextualBody",
+        value: "Berliner",
+        format: "text/plain",
+      },
+      target:
+        "https://wykhuh.github.io/newspaper-manifest/canvas/i1p2#xywh=2468,4313,106,26",
     },
   ],
 };
