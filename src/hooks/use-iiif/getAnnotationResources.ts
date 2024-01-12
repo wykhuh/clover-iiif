@@ -52,14 +52,16 @@ export const getAnnotationResources = async (
     annotations = vault.get(annotationPageReferenced.items);
   }
 
-  return formatAnnotations(vault, annotations);
+  const filteredAnnotations = annotations.filter((annotation) => {
+    return annotation.body !== undefined;
+  });
+
+  return formatAnnotations(vault, filteredAnnotations);
 };
 
 function formatAnnotations(vault: any, annotations: Annotation[]) {
-  const filteredAnnotations = annotations.filter((annotation) => {
-    if (!annotation.body) return;
-    if (annotation.motivation?.includes("supplementing")) return;
-
+  const groupedResources = {} as { [k: string]: GroupedResource[] };
+  annotations.forEach((annotation) => {
     const annotationBody = annotation.body as
       | ContentResource
       | ContentResource[];
@@ -69,12 +71,15 @@ function formatAnnotations(vault: any, annotations: Annotation[]) {
         const resource: IIIFExternalWebResource = vault.get(
           annotationBody[0].id,
         );
+        if (resource.format === "text/vtt") return;
 
         annotation.body = resource;
       } else {
         const bodies: IIIFExternalWebResource[] = [];
         annotationBody.forEach((body) => {
           const resource: IIIFExternalWebResource = vault.get(body.id);
+          if (resource.format === "text/vtt") return;
+
           bodies.push(resource);
         });
 
@@ -82,15 +87,11 @@ function formatAnnotations(vault: any, annotations: Annotation[]) {
       }
     } else {
       const resource: IIIFExternalWebResource = vault.get(annotationBody.id);
+      if (resource.format === "text/vtt") return;
 
       annotation.body = resource;
     }
 
-    return annotation;
-  });
-
-  const groupedResources = {} as { [k: string]: GroupedResource[] };
-  filteredAnnotations.forEach((annotation) => {
     const localizedLabel = annotation.label || { en: ["Annotation"] };
     const labelValue = Object.values(localizedLabel)[0] as string[];
     const label = labelValue[0];

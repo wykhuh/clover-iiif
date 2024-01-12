@@ -279,7 +279,7 @@ describe("getAnnotationResources method", () => {
     expect(result).toHaveLength(0);
   });
 
-  it("returns an empty array if manifest has supplementing motivation", async () => {
+  it("returns an empty array if manifest has VTT", async () => {
     const vault = new Vault();
     await vault.loadManifest(vttManifest);
 
