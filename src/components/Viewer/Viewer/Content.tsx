@@ -10,7 +10,10 @@ import { Canvas, IIIFExternalWebResource } from "@iiif/presentation-3";
 
 import InformationPanel from "src/components/Viewer/InformationPanel/InformationPanel";
 import { LabeledResource } from "src/hooks/use-iiif/getSupplementingResources";
-import { LabeledAnnotationedResource } from "src/hooks/use-iiif/getAnnotationResources";
+import {
+  LabeledAnnotationedResource,
+  LabeledContentSearchResource,
+} from "src/hooks/use-iiif/getAnnotationResources";
 import Media from "src/components/Viewer/Media/Media";
 import Painting from "../Painting/Painting";
 import React from "react";
@@ -21,6 +24,7 @@ interface Props {
   painting: IIIFExternalWebResource[];
   resources: LabeledResource[];
   annotationResources: LabeledAnnotationedResource[];
+  contentSearchResource?: LabeledContentSearchResource;
   items: Canvas[];
   isAudioVideo: boolean;
 }
@@ -30,6 +34,7 @@ const ViewerContent: React.FC<Props> = ({
   painting,
   resources,
   annotationResources,
+  contentSearchResource,
   items,
   isAudioVideo,
 }) => {
@@ -44,7 +49,8 @@ const ViewerContent: React.FC<Props> = ({
   const isAside =
     informationPanel?.renderAbout ||
     (informationPanel?.renderSupplementing && resources.length > 0) ||
-    informationPanel?.renderAnnotation;
+    informationPanel?.renderAnnotation ||
+    contentSearchResource;
 
   return (
     <Content
@@ -79,6 +85,7 @@ const ViewerContent: React.FC<Props> = ({
               activeCanvas={activeCanvas}
               resources={resources}
               annotationResources={annotationResources}
+              contentSearchResource={contentSearchResource}
             />
           </CollapsibleContent>
         </Aside>

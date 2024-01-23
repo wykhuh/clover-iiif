@@ -23,7 +23,10 @@ import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "src/components/Viewer/Viewer/ErrorFallback";
 import { IIIFExternalWebResource } from "@iiif/presentation-3";
 import { LabeledResource } from "src/hooks/use-iiif/getSupplementingResources";
-import { LabeledAnnotationedResource } from "src/hooks/use-iiif/getAnnotationResources";
+import {
+  LabeledAnnotationedResource,
+  LabeledContentSearchResource,
+} from "src/hooks/use-iiif/getAnnotationResources";
 import ViewerContent from "src/components/Viewer/Viewer/Content";
 import ViewerHeader from "src/components/Viewer/Viewer/Header";
 import { Wrapper } from "src/components/Viewer/Viewer/Viewer.styled";
@@ -60,6 +63,8 @@ const Viewer: React.FC<ViewerProps> = ({
   const [annotationResources, setAnnotationResources] = useState<
     LabeledAnnotationedResource[]
   >([]);
+  const [contentSearchResource, setContentSearchResource] =
+    useState<LabeledContentSearchResource>();
 
   const [isBodyLocked, setIsBodyLocked] = useBodyLocked(false);
   const isSmallViewport = useMediaQuery(media.sm);
@@ -135,7 +140,7 @@ const Viewer: React.FC<ViewerProps> = ({
         return getContentSearchResources(data, canvasLabelObj);
       })
       .then((resources) => {
-        console.log(resources);
+        setContentSearchResource(resources);
       })
       .catch((err) => {
         console.log(err);
@@ -164,6 +169,7 @@ const Viewer: React.FC<ViewerProps> = ({
             painting={painting}
             resources={resources}
             annotationResources={annotationResources}
+            contentSearchResource={contentSearchResource}
             items={manifest.items}
             isAudioVideo={isAudioVideo}
           />

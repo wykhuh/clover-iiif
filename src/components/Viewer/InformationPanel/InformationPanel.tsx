@@ -11,20 +11,26 @@ import { ViewerContextStore, useViewerState } from "src/context/viewer-context";
 import Information from "src/components/Viewer/InformationPanel/About/About";
 import { Label } from "src/components/Primitives";
 import { LabeledResource } from "src/hooks/use-iiif/getSupplementingResources";
-import { LabeledAnnotationedResource } from "src/hooks/use-iiif/getAnnotationResources";
+import {
+  LabeledAnnotationedResource,
+  LabeledContentSearchResource,
+} from "src/hooks/use-iiif/getAnnotationResources";
 import Resource from "src/components/Viewer/InformationPanel/Resource";
 import AnnotationResource from "src/components/Viewer/InformationPanel/AnnotationResource";
+import ContentSearchResource from "src/components/Viewer/InformationPanel/ContentSearchResource";
 
 interface NavigatorProps {
   activeCanvas: string;
   resources?: Array<LabeledResource>;
   annotationResources?: LabeledAnnotationedResource[];
+  contentSearchResource?: LabeledContentSearchResource;
 }
 
 export const InformationPanel: React.FC<NavigatorProps> = ({
   activeCanvas,
   resources,
   annotationResources,
+  contentSearchResource,
 }) => {
   const viewerState: ViewerContextStore = useViewerState();
   const { configOptions } = viewerState;
@@ -39,7 +45,9 @@ export const InformationPanel: React.FC<NavigatorProps> = ({
   const renderAnnotation = informationPanel?.renderAnnotation;
 
   useEffect(() => {
-    if (renderAbout) {
+    if (activeResource) {
+      return;
+    } else if (renderAbout) {
       setActiveResource("manifest-about");
     } else if (resources && resources?.length > 0 && !renderAbout) {
       setActiveResource(resources[0].id);
@@ -49,8 +57,17 @@ export const InformationPanel: React.FC<NavigatorProps> = ({
       !renderAbout
     ) {
       setActiveResource(annotationResources[0].id);
+    } else if (contentSearchResource) {
+      setActiveResource(contentSearchResource.id);
     }
-  }, [activeCanvas, renderAbout, resources, annotationResources]);
+  }, [
+    activeResource,
+    activeCanvas,
+    renderAbout,
+    resources,
+    annotationResources,
+    contentSearchResource,
+  ]);
 
   const handleValueChange = (value: string) => {
     setActiveResource(value);
@@ -84,6 +101,11 @@ export const InformationPanel: React.FC<NavigatorProps> = ({
               <Label label={resource.label} />
             </Trigger>
           ))}
+        {contentSearchResource && (
+          <Trigger value={contentSearchResource.id}>
+            <Label label={contentSearchResource.label} />
+          </Trigger>
+        )}
       </List>
       <Scroll>
         {renderAbout && (
@@ -109,6 +131,13 @@ export const InformationPanel: React.FC<NavigatorProps> = ({
               </Content>
             );
           })}
+        {contentSearchResource && (
+          <Content value={contentSearchResource.id}>
+            <ContentSearchResource
+              contentSearchResource={contentSearchResource}
+            />
+          </Content>
+        )}
       </Scroll>
     </Wrapper>
   );
