@@ -33,6 +33,7 @@ import { Wrapper } from "src/components/Viewer/Viewer/Viewer.styled";
 import { media } from "src/styles/stitches.config";
 import { useBodyLocked } from "src/hooks/useBodyLocked";
 import { useMediaQuery } from "src/hooks/useMediaQuery";
+import ContentSearchForm from "src/components/Viewer/Viewer/ContentSearchForm";
 
 interface ViewerProps {
   manifest: ManifestNormalized;
@@ -68,6 +69,7 @@ const Viewer: React.FC<ViewerProps> = ({
 
   const [isBodyLocked, setIsBodyLocked] = useBodyLocked(false);
   const isSmallViewport = useMediaQuery(media.sm);
+  const [searchServiceUrl, setSearchServiceUrl] = useState();
 
   const setInformationOpen = useCallback(
     (open: boolean) => {
@@ -147,6 +149,21 @@ const Viewer: React.FC<ViewerProps> = ({
       });
   }, [iiifContentSearch, manifest.items, vault]);
 
+  const hasSearchService = manifest.service.some(
+    (service: any) => service.type === "SearchService2",
+  );
+
+  useEffect(() => {
+    if (hasSearchService) {
+      const searchService: any = manifest.service.find(
+        (service: any) => service.type === "SearchService2",
+      );
+      if (searchService) {
+        setSearchServiceUrl(searchService.id);
+      }
+    }
+  }, [manifest, hasSearchService]);
+
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
       <Wrapper
@@ -164,6 +181,13 @@ const Viewer: React.FC<ViewerProps> = ({
             manifestLabel={manifest.label as InternationalString}
             manifestId={manifest.id}
           />
+          {hasSearchService && (
+            <ContentSearchForm
+              searchServiceUrl={searchServiceUrl}
+              setContentSearchResource={setContentSearchResource}
+              activeCanvas={activeCanvas}
+            />
+          )}
           <ViewerContent
             activeCanvas={activeCanvas}
             painting={painting}
