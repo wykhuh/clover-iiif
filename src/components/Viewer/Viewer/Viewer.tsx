@@ -4,6 +4,7 @@ import {
   ExternalResourceTypes,
   InternationalString,
   ManifestNormalized,
+  CanvasNormalized,
 } from "@iiif/presentation-3";
 import React, { useCallback, useEffect, useState } from "react";
 import {
@@ -15,6 +16,7 @@ import {
   getPaintingResource,
   getSupplementingResources,
   getAnnotationResources,
+  getContentSearchResources,
 } from "src/hooks/use-iiif";
 
 import { ErrorBoundary } from "react-error-boundary";
@@ -32,9 +34,14 @@ import { useMediaQuery } from "src/hooks/useMediaQuery";
 interface ViewerProps {
   manifest: ManifestNormalized;
   theme?: unknown;
+  iiifContentSearch?: string;
 }
 
-const Viewer: React.FC<ViewerProps> = ({ manifest, theme }) => {
+const Viewer: React.FC<ViewerProps> = ({
+  manifest,
+  theme,
+  iiifContentSearch,
+}) => {
   /**
    * Viewer State
    */
@@ -109,6 +116,31 @@ const Viewer: React.FC<ViewerProps> = ({ manifest, theme }) => {
       resources.length !== 0 || annotationResources.length !== 0,
     );
   }, [activeCanvas, vault, annotationResources.length]);
+
+  useEffect(() => {
+    if (iiifContentSearch === undefined) return;
+
+    fetch(iiifContentSearch)
+      .then((response) => response.json())
+      .then((data) => {
+        const canvasLabelObj = {};
+        manifest.items.forEach((item) => {
+          const tmpCanvas = vault.get(item.id) as CanvasNormalized;
+          if (tmpCanvas.label) {
+            const values = Object.values(tmpCanvas.label);
+            canvasLabelObj[item.id] = values[0] && values[0][0];
+          }
+        });
+
+        return getContentSearchResources(data, canvasLabelObj);
+      })
+      .then((resources) => {
+        console.log(resources);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [iiifContentSearch, manifest.items, vault]);
 
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>

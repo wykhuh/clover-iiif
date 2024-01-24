@@ -23,7 +23,7 @@ export type LabeledAnnotationedResource = {
   items: FormattedAnnotationItem[];
 };
 
-export type LabeledSourceContentResource = {
+export type LabeledContentSearchResource = {
   id: string;
   label: InternationalString;
   motivation: string | undefined;
@@ -137,13 +137,13 @@ function formatAnnotations(vault: any, annotations: Annotation[]) {
   return results;
 }
 
-export const getSearchContentResources = async (
+export const getContentSearchResources = async (
   annotationPage: AnnotationPage,
   canvasLabelObj: { [k: string]: string },
-): Promise<LabeledSourceContentResource> => {
+): Promise<LabeledContentSearchResource> => {
   if (annotationPage["@context"] !== "http://iiif.io/api/search/2/context.json")
-    return {} as LabeledSourceContentResource;
-  if (!annotationPage.items) return {} as LabeledSourceContentResource;
+    return {} as LabeledContentSearchResource;
+  if (!annotationPage.items) return {} as LabeledContentSearchResource;
 
   const vault = new Vault();
   await vault.loadManifest(annotationPage);

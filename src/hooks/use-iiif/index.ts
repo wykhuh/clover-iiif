@@ -6,7 +6,7 @@ import { getSupplementingResources } from "src/hooks/use-iiif/getSupplementingRe
 import { getThumbnail } from "src/hooks/use-iiif/getThumbnail";
 import {
   getAnnotationResources,
-  getSearchContentResources,
+  getContentSearchResources,
 } from "src/hooks/use-iiif/getAnnotationResources";
 
 export {
@@ -17,5 +17,5 @@ export {
   getSupplementingResources,
   getThumbnail,
   getAnnotationResources,
-  getSearchContentResources,
+  getContentSearchResources,
 };

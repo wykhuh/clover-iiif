@@ -1,9 +1,9 @@
 import { Vault } from "@iiif/vault";
 import {
   getAnnotationResources,
-  getSearchContentResources,
+  getContentSearchResources,
   LabeledAnnotationedResource,
-  LabeledSourceContentResource,
+  LabeledContentSearchResource,
 } from "./getAnnotationResources";
 import {
   multipleHighlighting,
@@ -296,19 +296,19 @@ describe("getAnnotationResources method", () => {
   });
 });
 
-describe("getSearchContentResources", () => {
+describe("getContentSearchResources", () => {
   const canvasLabelObj = {
     "https://wykhuh.github.io/newspaper-manifest/canvas/i1p1": "Page 1",
     "https://wykhuh.github.io/newspaper-manifest/canvas/i1p2": "Page 2",
   };
 
   it("processes search content AnnotationPage manifest", async () => {
-    const result = await getSearchContentResources(
+    const result = await getContentSearchResources(
       searchContent,
       canvasLabelObj,
     );
 
-    const expected: LabeledSourceContentResource = {
+    const expected: LabeledContentSearchResource = {
       id: "Search Results",
       items: {
         "Page 1": [
@@ -364,7 +364,7 @@ describe("getSearchContentResources", () => {
       type: "AnnotationPage",
     };
 
-    const result = await getSearchContentResources(
+    const result = await getContentSearchResources(
       annotationPage,
       canvasLabelObj,
     );
@@ -379,7 +379,7 @@ describe("getSearchContentResources", () => {
       type: "AnnotationPage",
     };
 
-    const result = await getSearchContentResources(
+    const result = await getContentSearchResources(
       annotationPage,
       canvasLabelObj,
     );
