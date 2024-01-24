@@ -26,7 +26,7 @@ export type LabeledAnnotationedResource = {
 export type LabeledContentSearchResource = {
   id: string;
   label: InternationalString;
-  motivation: string | undefined;
+  motivation?: string;
   items: { [k: string]: FormattedAnnotationItem[] };
 };
 
@@ -148,6 +148,14 @@ export const getContentSearchResources = async (
   const vault = new Vault();
   await vault.loadManifest(annotationPage);
   const annotations: Annotation[] = vault.get(annotationPage.items);
+
+  if (annotations.length === 0) {
+    return {
+      id: "Search Results",
+      label: { en: ["Search Results"] },
+      items: {},
+    };
+  }
 
   annotations.forEach((annotation) => {
     if (!annotation.body) return;

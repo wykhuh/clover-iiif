@@ -18,3 +18,7 @@ export const Item = styled("li", {
     backgroundColor: "$secondaryMuted",
   },
 });
+
+export const Message = styled("div", {
+  margin: "0 1.618rem",
+});
