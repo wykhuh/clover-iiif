@@ -68,7 +68,7 @@ describe("addOverlaysToViewer", () => {
     div.style.backgroundColor = backgroundColor as string;
     div.style.opacity = opacity as string;
     div.style.border = `${borderType} ${borderWidth} ${borderColor}`;
-    div.setAttribute("class", "annotation-overlay");
+    div.setAttribute("class", "overlay");
 
     return div;
   }
@@ -79,7 +79,13 @@ describe("addOverlaysToViewer", () => {
     const annotations = createAnnotations(target1);
 
     annotations.forEach((annotation) => {
-      addOverlaysToViewer(viewer, canvas, configOptions, annotation.items);
+      addOverlaysToViewer(
+        viewer,
+        canvas,
+        configOptions,
+        annotation.items,
+        "overlay",
+      );
     });
 
     expect(spy).toHaveBeenCalledTimes(1);
@@ -101,7 +107,13 @@ describe("addOverlaysToViewer", () => {
     const annotations = createAnnotations(target1);
 
     annotations.forEach((annotation) => {
-      addOverlaysToViewer(viewer, canvas, configOptions, annotation.items);
+      addOverlaysToViewer(
+        viewer,
+        canvas,
+        configOptions,
+        annotation.items,
+        "overlay",
+      );
     });
 
     expect(spy).toHaveBeenCalledTimes(0);
@@ -139,7 +151,13 @@ describe("addOverlaysToViewer", () => {
     );
 
     annotations.forEach((annotation) => {
-      addOverlaysToViewer(viewer, canvas, configOptions, annotation.items);
+      addOverlaysToViewer(
+        viewer,
+        canvas,
+        configOptions,
+        annotation.items,
+        "overlay",
+      );
     });
 
     expect(mockedOsdSvgOverlay).toHaveBeenCalledTimes(1);
@@ -179,7 +197,13 @@ describe("addOverlaysToViewer", () => {
     );
 
     annotations.forEach((annotation) => {
-      addOverlaysToViewer(viewer, canvas, configOptions, annotation.items);
+      addOverlaysToViewer(
+        viewer,
+        canvas,
+        configOptions,
+        annotation.items,
+        "overlay",
+      );
     });
 
     expect(mockedOsdSvgOverlay).toHaveBeenCalledTimes(1);

@@ -160,10 +160,6 @@ const Viewer: React.FC<ViewerProps> = ({
   }, [iiifContentSearch, manifest.items, vault]);
 
   // add overlays for content search
-  // 1) if iiifContentSearch is passed as a prop, fetch the content search manifest,
-  // then add overlays
-  // 2) if user selects content search result fron a non-active canvas, the canvas
-  // and openSeadragonViewer will change, then add overlays
   useEffect(() => {
     if (!openSeadragonViewer) return;
     if (contentSearchResource === undefined) return;
@@ -173,14 +169,17 @@ const Viewer: React.FC<ViewerProps> = ({
       type: "Canvas",
     });
 
-    // remove previous annotation overlays
-    removeOverlaysFromViewer(openSeadragonViewer);
-
-    // add overlays 2
+    removeOverlaysFromViewer(openSeadragonViewer, "content-search-annotations");
     Object.values(contentSearchResource.items).forEach((items) => {
       const itemsCanvas = items[0].canvas;
       if (itemsCanvas && itemsCanvas === activeCanvas) {
-        addOverlaysToViewer(openSeadragonViewer, canvas, configOptions, items);
+        addOverlaysToViewer(
+          openSeadragonViewer,
+          canvas,
+          configOptions,
+          items,
+          "content-search-annotations",
+        );
       }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -196,7 +195,7 @@ const Viewer: React.FC<ViewerProps> = ({
       type: "Canvas",
     });
 
-    removeOverlaysFromViewer(openSeadragonViewer);
+    removeOverlaysFromViewer(openSeadragonViewer, "annotation-overlay");
     if (configOptions.annotationOverlays?.renderOverlays) {
       annotationResources.forEach((annotation) => {
         addOverlaysToViewer(
@@ -204,6 +203,7 @@ const Viewer: React.FC<ViewerProps> = ({
           canvas,
           configOptions,
           annotation.items,
+          "annotation-overlay",
         );
       });
     }
