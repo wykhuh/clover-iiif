@@ -18,6 +18,10 @@ import {
   getAnnotationResources,
   getContentSearchResources,
 } from "src/hooks/use-iiif";
+import {
+  addOverlaysToViewer,
+  removeOverlaysFromViewer,
+} from "src/lib/annotation-overlays";
 
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "src/components/Viewer/Viewer/ErrorFallback";
@@ -51,7 +55,13 @@ const Viewer: React.FC<ViewerProps> = ({
    */
   const viewerState: ViewerContextStore = useViewerState();
   const viewerDispatch: any = useViewerDispatch();
-  const { activeCanvas, informationOpen, vault, configOptions } = viewerState;
+  const {
+    activeCanvas,
+    informationOpen,
+    vault,
+    configOptions,
+    openSeadragonViewer,
+  } = viewerState;
 
   /**
    * Local state
@@ -148,6 +158,33 @@ const Viewer: React.FC<ViewerProps> = ({
         console.log(err);
       });
   }, [iiifContentSearch, manifest.items, vault]);
+
+  // add overlays for content search
+  // 1) if iiifContentSearch is passed as a prop, fetch the content search manifest,
+  // then add overlays
+  // 2) if user selects content search result fron a non-active canvas, the canvas
+  // and openSeadragonViewer will change, then add overlays
+  useEffect(() => {
+    if (!openSeadragonViewer) return;
+    if (contentSearchResource === undefined) return;
+
+    const canvas: CanvasNormalized = vault.get({
+      id: activeCanvas,
+      type: "Canvas",
+    });
+
+    // remove previous annotation overlays
+    removeOverlaysFromViewer(openSeadragonViewer);
+
+    // add overlays 2
+    Object.values(contentSearchResource.items).forEach((items) => {
+      const itemsCanvas = items[0].canvas;
+      if (itemsCanvas && itemsCanvas === activeCanvas) {
+        addOverlaysToViewer(openSeadragonViewer, canvas, configOptions, items);
+      }
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [openSeadragonViewer, contentSearchResource]);
 
   const hasSearchService = manifest.service.some(
     (service: any) => service.type === "SearchService2",

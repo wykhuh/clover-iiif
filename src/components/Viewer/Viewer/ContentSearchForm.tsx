@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import * as Form from "@radix-ui/react-form";
 import { getContentSearchResources } from "src/hooks/use-iiif";
 import { LabeledContentSearchResource } from "src/hooks/use-iiif/getAnnotationResources";
-import { CanvasNormalized, ManifestNormalized } from "@iiif/presentation-3";
 import {
-  ViewerContextStore,
-  useViewerState,
-} from "src/context/viewer-context";
+  addOverlaysToViewer,
+  removeOverlaysFromViewer,
+} from "src/lib/annotation-overlays";
+import { CanvasNormalized, ManifestNormalized } from "@iiif/presentation-3";
+import { ViewerContextStore, useViewerState } from "src/context/viewer-context";
 
 type Props = {
   searchServiceUrl?: string;
@@ -23,10 +24,16 @@ const SearchContent: React.FC<Props> = ({
   const [searchTerms, setSearchTerms] = useState<string | undefined>();
   const viewerState: ViewerContextStore = useViewerState();
   const {
+    configOptions,
     vault,
+    activeCanvas,
     openSeadragonViewer,
     activeManifest,
   } = viewerState;
+  const canvas: CanvasNormalized = vault.get({
+    id: activeCanvas,
+    type: "Canvas",
+  });
 
   const manifest: ManifestNormalized = vault.get({
     id: activeManifest,
@@ -49,14 +56,34 @@ const SearchContent: React.FC<Props> = ({
     if (!searchTerms) return;
     if (searchTerms.trim() === "") return;
 
+    // connect to content search service
     const url = searchServiceUrl + "?q=" + searchTerms.trim();
     const res = await fetch(url);
     const searchManifest = await res.json();
-    getContentSearchResources(searchManifest, canvasLabelObj).then(
-      (resources) => {
+
+    // format the search manifest
+    getContentSearchResources(searchManifest, canvasLabelObj)
+      .then((resources) => {
+        // update contentSearchResource
         setContentSearchResource(resources);
-      },
-    );
+
+        // remove previous annotation overlays
+        removeOverlaysFromViewer(openSeadragonViewer);
+
+        // add overlays 1
+        Object.values(resources.items).forEach((items) => {
+          const itemsCanvas = items[0].canvas;
+          if (itemsCanvas && itemsCanvas === activeCanvas) {
+            addOverlaysToViewer(
+              openSeadragonViewer,
+              canvas,
+              configOptions,
+              items,
+            );
+          }
+        });
+      })
+      .catch((err) => console.log(err));
   }
 
   const handleChange = (e: any) => {
