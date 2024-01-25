@@ -1,47 +1,49 @@
-import { type CanvasNormalized } from "@iiif/presentation-3";
+import {
+  type CanvasNormalized,
+  SvgSelector,
+  PointSelector,
+} from "@iiif/presentation-3";
 import OpenSeadragon from "openseadragon";
 import { type ViewerConfigOptions } from "src/context/viewer-context";
 import { OsdSvgOverlay } from "src/lib/openseadragon-svg";
 
-import {
-  type LabeledAnnotationedResource,
-  type FormattedAnnotationItem,
-} from "src/hooks/use-iiif/getAnnotationResources";
+import { type FormattedAnnotationItem } from "src/hooks/use-iiif/getAnnotationResources";
 
 export function addOverlaysToViewer(
   viewer: OpenSeadragon.Viewer,
   canvas: CanvasNormalized,
   configOptions: ViewerConfigOptions,
-  resources: LabeledAnnotationedResource[],
+  items: FormattedAnnotationItem[],
 ): void {
   if (!viewer) return;
+  if (!canvas) return;
 
   const scale = 1 / canvas.width;
 
-  resources.forEach((resource) => {
-    resource.items.forEach((item) => {
-      if (typeof item.target === "string") {
-        if (item.target.includes("#xywh=")) {
-          handleXywhString(item, viewer, configOptions, scale);
-        }
-      } else if (typeof item.target === "object") {
-        if (item.target.selector?.type === "PointSelector") {
-          handlePointSelector(item, viewer, configOptions, scale);
-        } else if (item.target.selector?.type === "SvgSelector") {
-          handleSvgSelector(item, viewer, configOptions, scale);
+  items.forEach((item) => {
+    if (typeof item.target === "string") {
+      if (item.target.includes("#xywh=")) {
+        handleXywhString(item.target, viewer, configOptions, scale);
+      }
+    } else if (item.target && item.target.type === "SpecificResource") {
+      const selector = item.target.selector;
+      if (typeof selector === "object" && !Array.isArray(selector)) {
+        if (selector.type === "PointSelector") {
+          handlePointSelector(selector, viewer, configOptions, scale);
+        } else if (selector.type === "SvgSelector") {
+          handleSvgSelector(selector, viewer, configOptions, scale);
         }
       }
-    });
+    }
   });
 }
 
 function handleXywhString(
-  item: FormattedAnnotationItem,
+  target: string,
   viewer: OpenSeadragon.Viewer,
   configOptions: ViewerConfigOptions,
   scale: number,
 ): void {
-  const target = item.target as string;
   const parts = target.split("#xywh=");
   if (parts && parts[1]) {
     const [x, y, w, h] = parts[1].split(",").map((value) => Number(value));
@@ -58,13 +60,13 @@ function handleXywhString(
 }
 
 function handlePointSelector(
-  item: FormattedAnnotationItem,
+  selector: PointSelector,
   viewer: OpenSeadragon.Viewer,
   configOptions: ViewerConfigOptions,
   scale: number,
 ): void {
-  const x = item.target.selector?.x;
-  const y = item.target.selector?.y;
+  const x = selector.x;
+  const y = selector.y;
 
   const svg = `
     <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -76,13 +78,14 @@ function handlePointSelector(
 }
 
 function handleSvgSelector(
-  item: FormattedAnnotationItem,
+  selector: SvgSelector,
   viewer: OpenSeadragon.Viewer,
   configOptions: ViewerConfigOptions,
   scale: number,
 ) {
-  const svgString = item.target.selector?.value;
+  if ("id" in selector) return;
 
+  const svgString = selector.value;
   addSvgOverlay(viewer, svgString, configOptions, scale);
 }
 

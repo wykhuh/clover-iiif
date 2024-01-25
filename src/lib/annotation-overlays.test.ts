@@ -1,7 +1,7 @@
 import { addOverlaysToViewer } from "./annotation-overlays";
 import { LabeledAnnotationedResource } from "src/hooks/use-iiif/getAnnotationResources";
 import { afterEach, describe, expect, it, vi, Mock } from "vitest";
-import { type CanvasNormalized } from "@iiif/presentation-3";
+import { type CanvasNormalized, SpecificResource } from "@iiif/presentation-3";
 
 import { OsdSvgOverlay } from "src/lib/openseadragon-svg";
 vi.mock("src/lib/openseadragon-svg");
@@ -12,7 +12,9 @@ describe("addOverlaysToViewer", () => {
     vi.restoreAllMocks();
   });
 
-  function createAnnotations(target1): LabeledAnnotationedResource[] {
+  function createAnnotations(
+    target1: string | SpecificResource,
+  ): LabeledAnnotationedResource[] {
     return [
       {
         id: "Search results",
@@ -23,11 +25,13 @@ describe("addOverlaysToViewer", () => {
         items: [
           {
             target: target1,
-            id: "1",
-            type: "TextualBody",
-            format: "text/plain",
-            language: "en",
-            value: "cat",
+            body: {
+              id: "1",
+              type: "TextualBody",
+              format: "text/plain",
+              language: "en",
+              value: "cat",
+            },
           },
         ],
       },
@@ -74,7 +78,9 @@ describe("addOverlaysToViewer", () => {
     const target1 = "https://example.com/1#xywh=100,101,102,103";
     const annotations = createAnnotations(target1);
 
-    addOverlaysToViewer(viewer, canvas, configOptions, annotations);
+    annotations.forEach((annotation) => {
+      addOverlaysToViewer(viewer, canvas, configOptions, annotation.items);
+    });
 
     expect(spy).toHaveBeenCalledTimes(1);
     expect(spy.mock.calls[0]).toEqual([
@@ -94,7 +100,9 @@ describe("addOverlaysToViewer", () => {
     const target1 = "https://example.com/1";
     const annotations = createAnnotations(target1);
 
-    addOverlaysToViewer(viewer, canvas, configOptions, annotations);
+    annotations.forEach((annotation) => {
+      addOverlaysToViewer(viewer, canvas, configOptions, annotation.items);
+    });
 
     expect(spy).toHaveBeenCalledTimes(0);
   });
@@ -106,7 +114,7 @@ describe("addOverlaysToViewer", () => {
     };
     mockedOsdSvgOverlay.mockReturnValueOnce(mockDataTable);
 
-    const target1 = {
+    const target1: SpecificResource = {
       type: "SpecificResource",
       source:
         "https://iiif.io/api/cookbook/recipe/0135-annotating-point-in-canvas/canvas.json",
@@ -130,7 +138,9 @@ describe("addOverlaysToViewer", () => {
       "stroke: #990000; stroke-width: 1px; fill: #ff6666; fill-opacity: 0.5;",
     );
 
-    addOverlaysToViewer(viewer, canvas, configOptions, annotations);
+    annotations.forEach((annotation) => {
+      addOverlaysToViewer(viewer, canvas, configOptions, annotation.items);
+    });
 
     expect(mockedOsdSvgOverlay).toHaveBeenCalledTimes(1);
     expect(mockDataTable.append).toHaveBeenCalledTimes(1);
@@ -143,7 +153,7 @@ describe("addOverlaysToViewer", () => {
       append: vi.fn().mockReturnThis(),
     };
     mockedOsdSvgOverlay.mockReturnValueOnce(mockDataTable);
-    const target1 = {
+    const target1: SpecificResource = {
       type: "SpecificResource",
       source:
         "https://iiif.io/api/cookbook/recipe/0261-non-rectangular-commenting/canvas/p1",
@@ -168,7 +178,9 @@ describe("addOverlaysToViewer", () => {
       "stroke: #990000; stroke-width: 1px; fill: #ff6666; fill-opacity: 0.5;",
     );
 
-    addOverlaysToViewer(viewer, canvas, configOptions, annotations);
+    annotations.forEach((annotation) => {
+      addOverlaysToViewer(viewer, canvas, configOptions, annotation.items);
+    });
 
     expect(mockedOsdSvgOverlay).toHaveBeenCalledTimes(1);
     expect(mockDataTable.append).toHaveBeenCalledTimes(1);

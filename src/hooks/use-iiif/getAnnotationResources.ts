@@ -7,11 +7,12 @@ import {
   ContentResource,
   IIIFExternalWebResource,
   InternationalString,
+  Target,
 } from "@iiif/presentation-3";
 import { Vault } from "@iiif/vault";
 
 export type FormattedAnnotationItem = {
-  target: string;
+  target: Target;
   body: AnnotationBody[] | AnnotationBody;
   canvas?: string;
 };

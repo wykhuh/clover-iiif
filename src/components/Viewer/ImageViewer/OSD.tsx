@@ -89,12 +89,14 @@ const OSD: React.FC<OSDProps> = ({
             openSeadragonViewer: viewer,
           });
           if (configOptions.annotationOverlays?.renderOverlays) {
-            addOverlaysToViewer(
-              viewer,
-              canvas,
-              configOptions,
-              annotationResources,
-            );
+            annotationResources.forEach((annotation) => {
+              addOverlaysToViewer(
+                viewer,
+                canvas,
+                configOptions,
+                annotation.items,
+              );
+            });
           }
           break;
         case "tiledImage":
@@ -108,12 +110,14 @@ const OSD: React.FC<OSDProps> = ({
               openSeadragonViewer: viewer,
             });
             if (configOptions.annotationOverlays?.renderOverlays) {
-              addOverlaysToViewer(
-                viewer,
-                canvas,
-                configOptions,
-                annotationResources,
-              );
+              annotationResources.forEach((annotation) => {
+                addOverlaysToViewer(
+                  viewer,
+                  canvas,
+                  configOptions,
+                  annotation.items,
+                );
+              });
             }
           });
           break;
@@ -124,6 +128,7 @@ const OSD: React.FC<OSDProps> = ({
           break;
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [osdUri]);
 
   if (!osdInstance) return null;
