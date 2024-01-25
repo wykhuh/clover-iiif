@@ -29,6 +29,7 @@ export const SearchContentItem: React.FC<Props> = ({
     type: "Canvas",
   });
 
+  // when openSeadragonViewer changes, then zoom to target
   useEffect(() => {
     if (!openSeadragonViewer) return;
     if (item.target != activeTarget) return;
@@ -49,7 +50,7 @@ export const SearchContentItem: React.FC<Props> = ({
     const target = JSON.parse(e.target.dataset.target);
     const canvasId = e.target.dataset.canvas;
 
-    // handle cases where canvas stays the same
+    // if activeCanvas does not change, then zoom to target
     if (activeCanvas === canvasId) {
       const zoomLevel = configOptions.annotationOverlays?.zoomLevel || 1;
 
@@ -57,7 +58,8 @@ export const SearchContentItem: React.FC<Props> = ({
         if (!target.includes("#xywh=")) return;
         zoomToXYWHTarget(item.target, zoomLevel, canvas, openSeadragonViewer);
       }
-      // handle cases where canvas changes
+      // else activeCanvas does change, which will trigger rerendering <OSD />
+      // and creating new openseadragon viewer
     } else {
       dispatch({
         type: "updateActiveCanvas",
