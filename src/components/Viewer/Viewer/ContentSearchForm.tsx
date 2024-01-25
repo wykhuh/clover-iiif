@@ -2,10 +2,6 @@ import React, { useState } from "react";
 import * as Form from "@radix-ui/react-form";
 import { getContentSearchResources } from "src/hooks/use-iiif";
 import { LabeledContentSearchResource } from "src/hooks/use-iiif/getAnnotationResources";
-import {
-  addOverlaysToViewer,
-  removeOverlaysFromViewer,
-} from "src/lib/annotation-overlays";
 import { CanvasNormalized, ManifestNormalized } from "@iiif/presentation-3";
 import { ViewerContextStore, useViewerState } from "src/context/viewer-context";
 
@@ -23,17 +19,7 @@ const SearchContent: React.FC<Props> = ({
 }) => {
   const [searchTerms, setSearchTerms] = useState<string | undefined>();
   const viewerState: ViewerContextStore = useViewerState();
-  const {
-    configOptions,
-    vault,
-    activeCanvas,
-    openSeadragonViewer,
-    activeManifest,
-  } = viewerState;
-  const canvas: CanvasNormalized = vault.get({
-    id: activeCanvas,
-    type: "Canvas",
-  });
+  const { vault, openSeadragonViewer, activeManifest } = viewerState;
 
   const manifest: ManifestNormalized = vault.get({
     id: activeManifest,
@@ -66,22 +52,6 @@ const SearchContent: React.FC<Props> = ({
       .then((resources) => {
         // update contentSearchResource
         setContentSearchResource(resources);
-
-        // remove previous annotation overlays
-        removeOverlaysFromViewer(openSeadragonViewer);
-
-        // add overlays 1
-        Object.values(resources.items).forEach((items) => {
-          const itemsCanvas = items[0].canvas;
-          if (itemsCanvas && itemsCanvas === activeCanvas) {
-            addOverlaysToViewer(
-              openSeadragonViewer,
-              canvas,
-              configOptions,
-              items,
-            );
-          }
-        });
       })
       .catch((err) => console.log(err));
   }

@@ -21,7 +21,6 @@ describe("ImageViewer component", () => {
           height: 4440,
         }}
         hasPlaceholder={false}
-        annotationResources={[]}
       />,
     );
   });

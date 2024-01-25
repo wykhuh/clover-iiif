@@ -5,7 +5,6 @@ import { CanvasNormalized } from "@iiif/presentation-3";
 import ImageViewer from "src/components/Viewer/ImageViewer/ImageViewer";
 import { LabeledIIIFExternalWebResource } from "src/types/presentation-3";
 import { LabeledResource } from "src/hooks/use-iiif/getSupplementingResources";
-import { LabeledAnnotationedResource } from "src/hooks/use-iiif/getAnnotationResources";
 import PaintingPlaceholder from "./Placeholder";
 import Player from "src/components/Viewer/Player/Player";
 import React from "react";
@@ -15,7 +14,6 @@ import { useViewerState } from "src/context/viewer-context";
 interface PaintingProps {
   painting: LabeledIIIFExternalWebResource[];
   resources: LabeledResource[];
-  annotationResources: LabeledAnnotationedResource[];
   activeCanvas: string;
   isMedia: boolean;
 }
@@ -25,7 +23,6 @@ const Painting: React.FC<PaintingProps> = ({
   isMedia,
   painting,
   resources,
-  annotationResources,
 }) => {
   const [annotationIndex, setAnnotationIndex] = React.useState<number>(0);
   const [isInteractive, setIsInteractive] = React.useState(false);
@@ -105,7 +102,6 @@ const Painting: React.FC<PaintingProps> = ({
                 painting={painting[annotationIndex]}
                 hasPlaceholder={hasPlaceholder}
                 key={activeCanvas}
-                annotationResources={annotationResources}
               />
             )
           ))}

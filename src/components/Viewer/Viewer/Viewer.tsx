@@ -186,6 +186,30 @@ const Viewer: React.FC<ViewerProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [openSeadragonViewer, contentSearchResource]);
 
+  // add annotation overlays
+  useEffect(() => {
+    if (!openSeadragonViewer) return;
+    if (annotationResources.length === 0) return;
+
+    const canvas: CanvasNormalized = vault.get({
+      id: activeCanvas,
+      type: "Canvas",
+    });
+
+    removeOverlaysFromViewer(openSeadragonViewer);
+    if (configOptions.annotationOverlays?.renderOverlays) {
+      annotationResources.forEach((annotation) => {
+        addOverlaysToViewer(
+          openSeadragonViewer,
+          canvas,
+          configOptions,
+          annotation.items,
+        );
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [openSeadragonViewer, annotationResources]);
+
   const hasSearchService = manifest.service.some(
     (service: any) => service.type === "SearchService2",
   );
