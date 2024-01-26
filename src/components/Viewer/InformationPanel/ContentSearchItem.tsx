@@ -5,9 +5,9 @@ import {
   useViewerState,
   useViewerDispatch,
 } from "src/context/viewer-context";
-import OpenSeadragon from "openseadragon";
 import { type CanvasNormalized } from "@iiif/presentation-3";
 import { FormattedAnnotationItem } from "src/hooks/use-iiif/getAnnotationResources";
+import { zoomToXYWHTarget } from "src/lib/annotation-handlers";
 
 type Props = {
   item: FormattedAnnotationItem;
@@ -37,8 +37,6 @@ export const SearchContentItem: React.FC<Props> = ({
     const zoomLevel = configOptions.annotationOverlays?.zoomLevel || 1;
 
     if (typeof item.target === "string") {
-      if (!item.target.includes("#xywh=")) return;
-
       zoomToXYWHTarget(item.target, zoomLevel, canvas, openSeadragonViewer);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -55,8 +53,7 @@ export const SearchContentItem: React.FC<Props> = ({
       const zoomLevel = configOptions.annotationOverlays?.zoomLevel || 1;
 
       if (typeof target === "string") {
-        if (!target.includes("#xywh=")) return;
-        zoomToXYWHTarget(item.target, zoomLevel, canvas, openSeadragonViewer);
+        zoomToXYWHTarget(target, zoomLevel, canvas, openSeadragonViewer);
       }
       // else activeCanvas does change, which will trigger rerendering <OSD />
       // and creating new openseadragon viewer
@@ -107,19 +104,3 @@ export const SearchContentItem: React.FC<Props> = ({
 };
 
 export default SearchContentItem;
-
-function zoomToXYWHTarget(target, zoomLevel, canvas, openSeadragonViewer) {
-  const parts = target.split("#xywh=");
-  if (parts && parts[1]) {
-    const [x, y, w, h] = parts[1].split(",").map((value) => Number(value));
-    const scale = 1 / canvas.width;
-    const rect = new OpenSeadragon.Rect(
-      x * scale - ((w * scale) / 2) * (zoomLevel - 1),
-      y * scale - ((h * scale) / 2) * (zoomLevel - 1),
-      w * scale * zoomLevel,
-      h * scale * zoomLevel,
-    );
-
-    openSeadragonViewer.viewport.fitBounds(rect);
-  }
-}
