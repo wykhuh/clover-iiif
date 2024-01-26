@@ -78,39 +78,6 @@ const OSD: React.FC<OSDProps> = ({ uri, hasPlaceholder, imageType }) => {
         case "tiledImage":
           getInfoResponse(osdUri).then((tileSource) => {
             const viewer = OpenSeadragon(config);
-            // console.log("OSD", viewer?.id);
-
-            // viewer.addHandler("page", () => {
-            //   console.log("page");
-            // });
-            // viewer.addHandler("canvas-enter", (a) => {
-            //   console.log("canvas-enter:", a.eventSource.id);
-            // });
-            // viewer.addHandler("close", () => {
-            //   console.log("close");
-            // });
-            // viewer.addHandler("before-destroy", () => {
-            //   console.log("before-destroy");
-            // });
-            // viewer.addHandler("destroy", () => {
-            //   console.log("destroy");
-            // });
-            // viewer.addHandler("open", () => {
-            //   console.log("open");
-            // });
-            // viewer.addHandler("update-tile", () => {
-            //   console.log("update-tile");
-            // });
-            // viewer.addHandler("tile-loaded", (a, b, c, d) => {
-            //   console.log("tile-loaded:", a.eventSource.id);
-            // });
-            // viewer.addHandler("tile-drawn", () => {
-            //   console.log("tile-drawn");
-            // });
-
-            // viewer.addHandler("update-viewport", () => {
-            //   console.log("update-viewport");
-            // });
             viewer.addTiledImage({
               tileSource: tileSource,
             });

@@ -101,13 +101,10 @@ const RenderViewer: React.FC<CloverViewerProps> = ({
    * On change, pass the activeCanvas up to the wrapping `<App/>`
    * component to be handed off to a consuming application.
    */
-
-  // 4. use activeCanvas for canvasIdCallback
   useEffect(() => {
     if (canvasIdCallback) canvasIdCallback(activeCanvas);
   }, [activeCanvas, canvasIdCallback]);
 
-  // 3. use activeManifest to set ActiveCanvas
   useEffect(() => {
     if (activeManifest)
       vault
@@ -130,7 +127,6 @@ const RenderViewer: React.FC<CloverViewerProps> = ({
         });
   }, [activeManifest, dispatch, vault]);
 
-  // 1. load iiifContent url, call setIiifResource()
   useEffect(() => {
     dispatch({
       type: "updateConfigOptions",
@@ -149,7 +145,6 @@ const RenderViewer: React.FC<CloverViewerProps> = ({
       });
   }, [dispatch, iiifContent, options, vault]);
 
-  // 2. use iiifResource to set collection and ActiveManifest
   useEffect(() => {
     let manifests: string[] = [];
 
