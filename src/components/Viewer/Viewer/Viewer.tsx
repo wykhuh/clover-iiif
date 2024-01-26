@@ -135,13 +135,13 @@ const Viewer: React.FC<ViewerProps> = ({
     );
   }, [activeCanvas, vault, annotationResources.length]);
 
+  // fetch content search results if iiifContentSearch is set
   useEffect(() => {
     if (iiifContentSearch === undefined) return;
 
     fetch(iiifContentSearch)
       .then((response) => response.json())
       .then((data) => {
-        debugger;
         const canvasLabelObj = formatCanvasLabelObj(vault, manifest);
         return getContentSearchResources(data, canvasLabelObj);
       })
