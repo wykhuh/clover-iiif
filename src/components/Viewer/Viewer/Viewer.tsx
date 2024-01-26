@@ -30,6 +30,7 @@ import { LabeledResource } from "src/hooks/use-iiif/getSupplementingResources";
 import {
   LabeledAnnotationedResource,
   LabeledContentSearchResource,
+  formatCanvasLabelObj,
 } from "src/hooks/use-iiif/getAnnotationResources";
 import ViewerContent from "src/components/Viewer/Viewer/Content";
 import ViewerHeader from "src/components/Viewer/Viewer/Header";
@@ -140,15 +141,8 @@ const Viewer: React.FC<ViewerProps> = ({
     fetch(iiifContentSearch)
       .then((response) => response.json())
       .then((data) => {
-        const canvasLabelObj = {};
-        manifest.items.forEach((item) => {
-          const tmpCanvas = vault.get(item.id) as CanvasNormalized;
-          if (tmpCanvas.label) {
-            const values = Object.values(tmpCanvas.label);
-            canvasLabelObj[item.id] = values[0] && values[0][0];
-          }
-        });
-
+        debugger;
+        const canvasLabelObj = formatCanvasLabelObj(vault, manifest);
         return getContentSearchResources(data, canvasLabelObj);
       })
       .then((resources) => {
@@ -157,7 +151,7 @@ const Viewer: React.FC<ViewerProps> = ({
       .catch((err) => {
         console.log(err);
       });
-  }, [iiifContentSearch, manifest.items, vault]);
+  }, [iiifContentSearch, manifest, vault]);
 
   // add overlays for content search
   useEffect(() => {

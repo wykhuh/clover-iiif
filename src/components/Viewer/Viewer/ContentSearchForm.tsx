@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import * as Form from "@radix-ui/react-form";
 import { getContentSearchResources } from "src/hooks/use-iiif";
-import { LabeledContentSearchResource } from "src/hooks/use-iiif/getAnnotationResources";
-import { CanvasNormalized, ManifestNormalized } from "@iiif/presentation-3";
+import {
+  LabeledContentSearchResource,
+  formatCanvasLabelObj,
+} from "src/hooks/use-iiif/getAnnotationResources";
+import { ManifestNormalized } from "@iiif/presentation-3";
 import { ViewerContextStore, useViewerState } from "src/context/viewer-context";
 
 type Props = {
@@ -25,15 +28,7 @@ const SearchContent: React.FC<Props> = ({
     id: activeManifest,
     type: "Manifest",
   });
-
-  const canvasLabelObj = {};
-  manifest.items.forEach((item) => {
-    const tmpCanvas = vault.get(item.id) as CanvasNormalized;
-    if (tmpCanvas.label) {
-      const values = Object.values(tmpCanvas.label);
-      canvasLabelObj[item.id] = values[0] && values[0][0];
-    }
-  });
+  const canvasLabelObj = formatCanvasLabelObj(vault, manifest);
 
   async function searchSubmitHandler(e) {
     e.preventDefault();

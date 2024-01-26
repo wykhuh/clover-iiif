@@ -4,6 +4,7 @@ import {
   getContentSearchResources,
   LabeledAnnotationedResource,
   LabeledContentSearchResource,
+  formatCanvasLabelObj,
 } from "./getAnnotationResources";
 import {
   multipleHighlighting,
@@ -18,7 +19,7 @@ import {
   manifestNoAnnotations,
   vttManifest,
 } from "src/fixtures/use-iiif/get-supplementing-resources";
-import { AnnotationPage } from "@iiif/presentation-3";
+import { AnnotationPage, ManifestNormalized } from "@iiif/presentation-3";
 
 describe("getAnnotationResources method", () => {
   it("processes manifest with simple annotations", async () => {
@@ -385,5 +386,24 @@ describe("getContentSearchResources", () => {
     );
 
     expect(result).toStrictEqual({});
+  });
+});
+
+describe("formatCanvasLabelObj", () => {
+  it("creates object with canvas and corresponding label for a manifest", async () => {
+    const vault = new Vault();
+    await vault.loadManifest(multipleHighlighting);
+    const manifest: ManifestNormalized = vault.get({
+      id: multipleHighlighting.id,
+      type: "Manifest",
+    });
+
+    const res = formatCanvasLabelObj(vault, manifest);
+
+    const expected = {
+      "https://wykhuh.github.io/newspaper-manifest/canvas/i1p1": "p. 1",
+      "https://wykhuh.github.io/newspaper-manifest/canvas/i1p2": "p. 2",
+    };
+    expect(res).toStrictEqual(expected);
   });
 });

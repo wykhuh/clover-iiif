@@ -8,6 +8,7 @@ import {
   IIIFExternalWebResource,
   InternationalString,
   Target,
+  ManifestNormalized,
 } from "@iiif/presentation-3";
 import { Vault } from "@iiif/vault";
 
@@ -136,6 +137,19 @@ function formatAnnotations(vault: any, annotations: Annotation[]) {
   }
 
   return results;
+}
+
+export function formatCanvasLabelObj(vault: any, manifest: ManifestNormalized) {
+  const canvasLabelObj = {};
+  manifest.items.forEach((item) => {
+    const tmpCanvas = vault.get(item.id) as CanvasNormalized;
+    if (tmpCanvas.label) {
+      const values = Object.values(tmpCanvas.label);
+      canvasLabelObj[item.id] = values[0] && values[0][0];
+    }
+  });
+
+  return canvasLabelObj;
 }
 
 export const getContentSearchResources = async (
