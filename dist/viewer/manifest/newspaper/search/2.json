@@ -1,0 +1,62 @@
+{
+  "@context": "http://iiif.io/api/search/2/context.json",
+  "id": "http://localhost:3000/manifest/newspaper/search/2.json",
+  "type": "AnnotationPage",
+  "items": [
+    {
+      "id": "http://localhost:3000/manifest/newspaper/annotation/11",
+      "type": "Annotation",
+      "motivation": "highlighting",
+      "body": {
+        "type": "TextualBody",
+        "value": "Berliner",
+        "format": "text/plain"
+      },
+      "target": "http://localhost:3000/manifest/newspaper/canvas/i2p1#xywh=184,558,1052,322"
+    },
+    {
+      "id": "http://localhost:3000/manifest/newspaper/annotation/1121",
+      "type": "Annotation",
+      "motivation": "highlighting",
+      "body": {
+        "type": "TextualBody",
+        "value": "Berliner",
+        "format": "text/plain"
+      },
+      "target": "http://localhost:3000/manifest/newspaper/canvas/i2p1#xywh=2123,1645,117,27"
+    },
+    {
+      "id": "http://localhost:3000/manifest/newspaper/annotation/1222",
+      "type": "Annotation",
+      "motivation": "highlighting",
+      "body": {
+        "type": "TextualBody",
+        "value": "Berliner",
+        "format": "text/plain"
+      },
+      "target": "http://localhost:3000/manifest/newspaper/canvas/i2p1#xywh=2399,2207,170,40"
+    },
+    {
+      "id": "http://localhost:3000/manifest/newspaper/annotation/74",
+      "type": "Annotation",
+      "motivation": "highlighting",
+      "body": {
+        "type": "TextualBody",
+        "value": "Berliner",
+        "format": "text/plain"
+      },
+      "target": "http://localhost:3000/manifest/newspaper/canvas/i2p2#xywh=1134,768,106,25"
+    },
+    {
+      "id": "http://localhost:3000/manifest/newspaper/annotation/2692",
+      "type": "Annotation",
+      "motivation": "highlighting",
+      "body": {
+        "type": "TextualBody",
+        "value": "Berliner",
+        "format": "text/plain"
+      },
+      "target": "http://localhost:3000/manifest/newspaper/canvas/i2p2#xywh=3301,4156,96,22"
+    }
+  ]
+}
