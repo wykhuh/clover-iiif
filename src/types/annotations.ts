@@ -1,4 +1,7 @@
-import { AnnotationPageNormalized } from "@iiif/presentation-3";
+import {
+  AnnotationPageNormalized,
+  InternationalString,
+} from "@iiif/presentation-3";
 
 type AnnotationResources = AnnotationPageNormalized[];
 
@@ -18,4 +21,19 @@ interface ParsedAnnotationTarget {
   t?: string;
 }
 
-export type { AnnotationResources, ParsedAnnotationTarget };
+type FormattedAnnotationItem = {
+  [k: string]: any;
+};
+
+type SearchContentResources = {
+  id: string;
+  label: InternationalString;
+  motivation: string | undefined;
+  items: { [k: string]: FormattedAnnotationItem[] };
+};
+
+export type {
+  AnnotationResources,
+  SearchContentResources,
+  ParsedAnnotationTarget,
+};
