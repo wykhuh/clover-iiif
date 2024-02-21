@@ -82,6 +82,7 @@ export interface ViewerContextStore {
   informationOpen: boolean;
   isLoaded: boolean;
   vault: Vault;
+  contentSearchVault: Vault;
   openSeadragonViewer: OpenSeadragon.Viewer | null;
 }
 
@@ -94,6 +95,7 @@ export interface ViewerAction {
   isLoaded: boolean;
   manifestId: string;
   vault: Vault;
+  contentSearchVault: Vault;
   openSeadragonViewer: OpenSeadragon.Viewer;
 }
 
@@ -106,6 +108,7 @@ export const defaultState: ViewerContextStore = {
   informationOpen: defaultConfigOptions?.informationPanel?.open,
   isLoaded: false,
   vault: new Vault(),
+  contentSearchVault: new Vault(),
   openSeadragonViewer: null,
 };
 
