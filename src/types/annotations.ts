@@ -4,6 +4,7 @@ import {
 } from "@iiif/presentation-3";
 
 type AnnotationResources = AnnotationPageNormalized[];
+type AnnotationResource = AnnotationPageNormalized;
 
 interface ParsedAnnotationTarget {
   id: string;
@@ -34,6 +35,7 @@ type SearchContentResources = {
 
 export type {
   AnnotationResources,
+  AnnotationResource,
   SearchContentResources,
   ParsedAnnotationTarget,
 };

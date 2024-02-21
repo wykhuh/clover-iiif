@@ -9,7 +9,9 @@ import React, { useEffect, useState } from "react";
 import { ViewerContextStore, useViewerState } from "src/context/viewer-context";
 
 import AnnotationPage from "src/components/Viewer/InformationPanel/Annotation/Page";
-import { AnnotationResources } from "src/types/annotations";
+import ContentSearchAnnotationPage from "src/components/Viewer/InformationPanel/ContentSearch/Page";
+
+import { AnnotationResources, AnnotationResource } from "src/types/annotations";
 import Information from "src/components/Viewer/InformationPanel/About/About";
 import { InternationalString } from "@iiif/presentation-3";
 import { Label } from "src/components/Primitives";
@@ -17,11 +19,13 @@ import { Label } from "src/components/Primitives";
 interface NavigatorProps {
   activeCanvas: string;
   annotationResources?: AnnotationResources;
+  contentSearchResource?: AnnotationResource;
 }
 
 export const InformationPanel: React.FC<NavigatorProps> = ({
   activeCanvas,
   annotationResources,
+  contentSearchResource,
 }) => {
   const viewerState: ViewerContextStore = useViewerState();
   const {
@@ -32,9 +36,14 @@ export const InformationPanel: React.FC<NavigatorProps> = ({
 
   const renderAbout = informationPanel?.renderAbout;
   const renderAnnotation = informationPanel?.renderAnnotation;
+  const renderContentSearch = informationPanel?.renderContentSearch;
 
   useEffect(() => {
-    if (renderAbout) {
+    if (activeResource) {
+      return;
+    } else if (renderContentSearch) {
+      setActiveResource("manifest-content-search");
+    } else if (renderAbout) {
       setActiveResource("manifest-about");
     } else if (
       annotationResources &&
@@ -43,7 +52,14 @@ export const InformationPanel: React.FC<NavigatorProps> = ({
     ) {
       setActiveResource(annotationResources[0].id);
     }
-  }, [activeCanvas, renderAbout, annotationResources]);
+  }, [
+    activeCanvas,
+    activeResource,
+    renderAbout,
+    renderContentSearch,
+    annotationResources,
+    contentSearchResource,
+  ]);
 
   const handleValueChange = (value: string) => {
     setActiveResource(value);
@@ -59,8 +75,12 @@ export const InformationPanel: React.FC<NavigatorProps> = ({
       className="clover-viewer-information-panel"
     >
       <List aria-label="select chapter" data-testid="information-panel-list">
+        {renderContentSearch && contentSearchResource && (
+          <Trigger value="manifest-content-search">
+            <Label label={contentSearchResource.label as InternationalString} />
+          </Trigger>
+        )}
         {renderAbout && <Trigger value="manifest-about">About</Trigger>}
-
         {renderAnnotation &&
           annotationResources &&
           annotationResources.map((resource, i) => (
@@ -70,12 +90,18 @@ export const InformationPanel: React.FC<NavigatorProps> = ({
           ))}
       </List>
       <Scroll>
+        {renderContentSearch && contentSearchResource && (
+          <Content value="manifest-content-search">
+            <ContentSearchAnnotationPage
+              annotationPage={contentSearchResource}
+            />
+          </Content>
+        )}
         {renderAbout && (
           <Content value="manifest-about">
             <Information />
           </Content>
         )}
-
         {renderAnnotation &&
           annotationResources &&
           annotationResources.map((annotationPage) => {
