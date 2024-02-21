@@ -110,6 +110,7 @@ export interface ViewerContextStore {
   isLoaded: boolean;
   isUserScrolling?: number | undefined;
   vault: Vault;
+  contentSearchVault: Vault;
   openSeadragonViewer: OpenSeadragon.Viewer | null;
   openSeadragonId?: string;
   viewerId?: string;
@@ -127,6 +128,7 @@ export interface ViewerAction {
   isUserScrolling: number | undefined;
   manifestId: string;
   vault: Vault;
+  contentSearchVault: Vault;
   openSeadragonViewer: OpenSeadragon.Viewer;
   viewerId: string;
 }
@@ -170,6 +172,7 @@ export const defaultState: ViewerContextStore = {
   isLoaded: false,
   isUserScrolling: undefined,
   vault: new Vault(),
+  contentSearchVault: new Vault(),
   openSeadragonViewer: null,
   viewerId: uuidv4(),
 };
