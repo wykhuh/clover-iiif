@@ -7,24 +7,31 @@ import {
 } from "src/components/Viewer/InformationPanel/InformationPanel.styled";
 import React, { useEffect, useState } from "react";
 import { ViewerContextStore, useViewerState } from "src/context/viewer-context";
-
 import AnnotationPage from "src/components/Viewer/InformationPanel/Annotation/Page";
-import ContentSearchAnnotationPage from "src/components/Viewer/InformationPanel/ContentSearch/Page";
-
+import ContentSearch from "src/components/Viewer/InformationPanel/ContentSearch/ContentSearch";
 import { AnnotationResources, AnnotationResource } from "src/types/annotations";
 import Information from "src/components/Viewer/InformationPanel/About/About";
-import { InternationalString } from "@iiif/presentation-3";
+import {
+  InternationalString,
+  AnnotationPageNormalized,
+} from "@iiif/presentation-3";
 import { Label } from "src/components/Primitives";
 
 interface NavigatorProps {
   activeCanvas: string;
   annotationResources?: AnnotationResources;
+  searchServiceUrl?: string;
+  setContentSearchResource: React.Dispatch<
+    React.SetStateAction<AnnotationPageNormalized | undefined>
+  >;
   contentSearchResource?: AnnotationResource;
 }
 
 export const InformationPanel: React.FC<NavigatorProps> = ({
   activeCanvas,
   annotationResources,
+  searchServiceUrl,
+  setContentSearchResource,
   contentSearchResource,
 }) => {
   const viewerState: ViewerContextStore = useViewerState();
@@ -92,7 +99,10 @@ export const InformationPanel: React.FC<NavigatorProps> = ({
       <Scroll>
         {renderContentSearch && contentSearchResource && (
           <Content value="manifest-content-search">
-            <ContentSearchAnnotationPage
+            <ContentSearch
+              searchServiceUrl={searchServiceUrl}
+              setContentSearchResource={setContentSearchResource}
+              activeCanvas={activeCanvas}
               annotationPage={contentSearchResource}
             />
           </Content>

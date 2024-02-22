@@ -66,6 +66,8 @@ const Viewer: React.FC<ViewerProps> = ({
 
   const [isBodyLocked, setIsBodyLocked] = useBodyLocked(false);
   const isSmallViewport = useMediaQuery(media.sm);
+  const [searchServiceUrl, setSearchServiceUrl] = useState();
+
   const setInformationOpen = useCallback(
     (open: boolean) => {
       viewerDispatch({
@@ -113,14 +115,36 @@ const Viewer: React.FC<ViewerProps> = ({
   }, [activeCanvas, annotationResources.length, vault]);
 
   useEffect(() => {
+    // make request to content search service using iiifContentSearch prop
     if (iiifContentSearch === undefined) return;
+    if (configOptions.informationPanel?.renderContentSearch === false) return;
 
     getContentSearchResources(contentSearchVault, iiifContentSearch).then(
       (contentSearch) => {
         setContentSearchResource(contentSearch);
       },
     );
-  }, [iiifContentSearch, contentSearchVault]);
+  }, [
+    iiifContentSearch,
+    contentSearchVault,
+    configOptions.informationPanel?.renderContentSearch,
+  ]);
+
+  const hasSearchService = manifest.service.some(
+    (service: any) => service.type === "SearchService2",
+  );
+
+  useEffect(() => {
+    // check if search service exists in the manifest
+    if (hasSearchService) {
+      const searchService: any = manifest.service.find(
+        (service: any) => service.type === "SearchService2",
+      );
+      if (searchService) {
+        setSearchServiceUrl(searchService.id);
+      }
+    }
+  }, [manifest, hasSearchService]);
 
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
@@ -143,6 +167,8 @@ const Viewer: React.FC<ViewerProps> = ({
             activeCanvas={activeCanvas}
             painting={painting}
             annotationResources={annotationResources}
+            searchServiceUrl={searchServiceUrl}
+            setContentSearchResource={setContentSearchResource}
             contentSearchResource={contentSearchResource}
             items={manifest.items}
             isAudioVideo={isAudioVideo}
