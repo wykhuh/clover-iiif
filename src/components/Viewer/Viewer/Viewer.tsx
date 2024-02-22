@@ -58,6 +58,7 @@ const Viewer: React.FC<ViewerProps> = ({
     contentSearchVault,
     configOptions,
     openSeadragonViewer,
+    plugins,
   } = viewerState;
 
   /**
@@ -179,6 +180,20 @@ const Viewer: React.FC<ViewerProps> = ({
     }
   }, [manifest, hasSearchService]);
 
+  function renderPlugins(activeCanvas, openSeadragonViewer) {
+    return plugins.map((plugin, i) => {
+      const Plugin = plugin.component as unknown as React.ElementType;
+      return (
+        <Plugin
+          key={i}
+          {...plugin.componentProps}
+          openSeadragonViewer={openSeadragonViewer}
+          activeCanvas={activeCanvas}
+        ></Plugin>
+      );
+    });
+  }
+
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
       <Wrapper
@@ -196,6 +211,9 @@ const Viewer: React.FC<ViewerProps> = ({
             manifestLabel={manifest.label as InternationalString}
             manifestId={manifest.id}
           />
+          {activeCanvas &&
+            openSeadragonViewer &&
+            renderPlugins(activeCanvas, openSeadragonViewer)}
           <ViewerContent
             activeCanvas={activeCanvas}
             painting={painting}
