@@ -237,3 +237,15 @@ function svg_handleTextNode(child: ChildNode) {
     child.childNodes.length,
   );
 }
+
+export function removeOverlaysFromViewer(
+  viewer: OpenSeadragon.Viewer,
+  overlaySelector = ".annotation-overlay",
+) {
+  if (!viewer) return;
+
+  const elements = document.querySelectorAll(overlaySelector);
+  if (elements) {
+    elements.forEach((element) => viewer.removeOverlay(element));
+  }
+}
