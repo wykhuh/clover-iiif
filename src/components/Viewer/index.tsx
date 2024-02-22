@@ -8,6 +8,7 @@ import {
   useViewerDispatch,
   useViewerState,
   CustomDisplay,
+  Plugin,
 } from "src/context/viewer-context";
 
 import { Vault } from "@iiif/vault";
@@ -23,6 +24,7 @@ import {
 export interface CloverViewerProps {
   canvasIdCallback?: (arg0: string) => void;
   customDisplays?: Array<CustomDisplay>;
+  plugins?: Array<Plugin>;
   customTheme?: any;
   iiifContent: string;
   id?: string;
@@ -34,6 +36,7 @@ export interface CloverViewerProps {
 const CloverViewer: React.FC<CloverViewerProps> = ({
   canvasIdCallback = () => {},
   customDisplays = [],
+  plugins = [],
   customTheme,
   iiifContent,
   id,
@@ -60,6 +63,7 @@ const CloverViewer: React.FC<CloverViewerProps> = ({
       initialState={{
         ...defaultState,
         customDisplays,
+        plugins,
         isAutoScrollEnabled: autoScrollOptions.enabled,
         isInformationOpen: Boolean(options?.informationPanel?.open),
         vault: new Vault({
