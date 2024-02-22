@@ -72,6 +72,10 @@ export type CustomDisplay = {
     paintingFormat?: string[];
   };
 };
+export type Plugin = {
+  component: React.ElementType;
+  componentProps?: Record<string, unknown>;
+};
 
 export interface ViewerContextStore {
   activeCanvas: string;
@@ -79,6 +83,7 @@ export interface ViewerContextStore {
   collection?: CollectionNormalized | Record<string, never>;
   configOptions: ViewerConfigOptions;
   customDisplays: Array<CustomDisplay>;
+  plugins: Array<Plugin>;
   informationOpen: boolean;
   isLoaded: boolean;
   vault: Vault;
@@ -103,6 +108,7 @@ export const defaultState: ViewerContextStore = {
   collection: {},
   configOptions: defaultConfigOptions,
   customDisplays: [],
+  plugins: [],
   informationOpen: defaultConfigOptions?.informationPanel?.open,
   isLoaded: false,
   vault: new Vault(),
