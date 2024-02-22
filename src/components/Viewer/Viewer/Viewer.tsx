@@ -130,7 +130,7 @@ const Viewer: React.FC<ViewerProps> = ({
     getContentSearchResources(
       contentSearchVault,
       iiifContentSearch,
-      configOptions.localeText.contentSearch.tabLabel,
+      configOptions.localeText?.contentSearch.tabLabel as string,
     ).then((contentSearch) => {
       setContentSearchResource(contentSearch);
     });
@@ -145,9 +145,6 @@ const Viewer: React.FC<ViewerProps> = ({
       id: activeCanvas,
       type: "Canvas",
     });
-
-    console.log("openSeadragonViewer 20", openSeadragonViewer?.id);
-    console.log("canvas 20", canvas.id);
 
     removeOverlaysFromViewer(openSeadragonViewer);
     addContentSearchOverlays(

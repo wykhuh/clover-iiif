@@ -36,7 +36,7 @@ export type ViewerConfigOptions = {
   showIIIFBadge?: boolean;
   showTitle?: boolean;
   withCredentials?: boolean;
-  localeText: { [k: string]: { [k: string]: string } };
+  localeText?: { [k: string]: { [k: string]: string } };
 };
 
 const defaultConfigOptions = {

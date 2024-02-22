@@ -24,6 +24,7 @@ const props = {
   annotationResources: [],
   items: [],
   isAudioVideo: false,
+  setContentSearchResource: () => {},
 };
 
 describe("ViewerContent", () => {
