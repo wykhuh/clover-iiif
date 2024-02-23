@@ -99,7 +99,13 @@ const OSD: React.FC<OSDProps> = ({
             openSeadragonViewer: viewer,
           });
           if (configOptions.annotationOverlays?.renderOverlays) {
-            addOverlaysToViewer(viewer, canvas, configOptions, annotations);
+            addOverlaysToViewer(
+              viewer,
+              canvas,
+              configOptions,
+              annotations,
+              "annotation-overlay",
+            );
           }
           break;
         case "tiledImage":
@@ -113,7 +119,13 @@ const OSD: React.FC<OSDProps> = ({
               openSeadragonViewer: viewer,
             });
             if (configOptions.annotationOverlays?.renderOverlays) {
-              addOverlaysToViewer(viewer, canvas, configOptions, annotations);
+              addOverlaysToViewer(
+                viewer,
+                canvas,
+                configOptions,
+                annotations,
+                "annotation-overlay",
+              );
             }
           });
           break;

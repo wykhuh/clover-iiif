@@ -15,6 +15,7 @@ export function addOverlaysToViewer(
   canvas: CanvasNormalized,
   configOptions: ViewerConfigOptions,
   annotations: Annotation[] | AnnotationNormalized[],
+  overlaySelector: string,
 ): void {
   if (!viewer) return;
 
@@ -35,6 +36,7 @@ export function addOverlaysToViewer(
         w * scale,
         h * scale,
         configOptions,
+        overlaySelector,
       );
     }
 
@@ -46,11 +48,11 @@ export function addOverlaysToViewer(
         </svg>
       `;
 
-      addSvgOverlay(viewer, svg, configOptions, scale);
+      addSvgOverlay(viewer, svg, configOptions, scale, overlaySelector);
     }
 
     if (svg) {
-      addSvgOverlay(viewer, svg, configOptions, scale);
+      addSvgOverlay(viewer, svg, configOptions, scale, overlaySelector);
     }
   });
 }
@@ -103,6 +105,7 @@ function addRectangularOverlay(
   w: number,
   h: number,
   configOptions: ViewerConfigOptions,
+  overlaySelector: string,
 ): void {
   const rect = new OpenSeadragon.Rect(x, y, w, h);
   const div = document.createElement("div");
@@ -114,7 +117,7 @@ function addRectangularOverlay(
     div.style.backgroundColor = backgroundColor as string;
     div.style.opacity = opacity as string;
     div.style.border = `${borderType} ${borderWidth} ${borderColor}`;
-    div.className = "annotation-overlay";
+    div.className = overlaySelector;
   }
 
   viewer.addOverlay(div, rect);
@@ -134,11 +137,12 @@ export function addSvgOverlay(
   svgString: string,
   configOptions: ViewerConfigOptions,
   scale: number,
+  overlaySelector: string,
 ) {
   const svgEl = convertSVGStringToHTML(svgString);
   if (svgEl) {
     for (const child of svgEl.children) {
-      svg_processChild(viewer, child, configOptions, scale);
+      svg_processChild(viewer, child, configOptions, scale, overlaySelector);
     }
   }
 }
@@ -148,6 +152,7 @@ function svg_processChild(
   child: ChildNode,
   configOptions: ViewerConfigOptions,
   scale: number,
+  overlaySelector: string,
 ) {
   if (child.nodeName === "#text") {
     svg_handleTextNode(child);
@@ -155,11 +160,11 @@ function svg_processChild(
     const newElement = svg_handleElementNode(child, configOptions, scale);
     const overlay = OsdSvgOverlay(viewer);
     overlay.node().append(newElement);
-    overlay._svg?.setAttribute("class", "annotation-overlay");
+    overlay._svg?.setAttribute("class", overlaySelector);
 
     // BUG: svg with children elements aren't formated correctly.
     child.childNodes.forEach((child) => {
-      svg_processChild(viewer, child, configOptions, scale);
+      svg_processChild(viewer, child, configOptions, scale, overlaySelector);
     });
   }
 }
@@ -240,10 +245,13 @@ function svg_handleTextNode(child: ChildNode) {
 
 export function removeOverlaysFromViewer(
   viewer: OpenSeadragon.Viewer,
-  overlaySelector = ".annotation-overlay",
+  overlaySelector: string,
 ) {
   if (!viewer) return;
 
+  if (!overlaySelector.startsWith(".")) {
+    overlaySelector = "." + overlaySelector;
+  }
   const elements = document.querySelectorAll(overlaySelector);
   if (elements) {
     elements.forEach((element) => viewer.removeOverlay(element));
