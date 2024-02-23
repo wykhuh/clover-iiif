@@ -130,7 +130,7 @@ const Viewer: React.FC<ViewerProps> = ({
     getContentSearchResources(
       contentSearchVault,
       iiifContentSearch,
-      configOptions.localeText?.contentSearch.tabLabel as string,
+      configOptions.localeText?.contentSearch?.tabLabel as string,
     ).then((contentSearch) => {
       setContentSearchResource(contentSearch);
     });
