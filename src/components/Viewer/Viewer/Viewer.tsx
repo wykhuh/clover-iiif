@@ -153,7 +153,7 @@ const Viewer: React.FC<ViewerProps> = ({
       type: "Canvas",
     });
 
-    removeOverlaysFromViewer(openSeadragonViewer);
+    removeOverlaysFromViewer(openSeadragonViewer, "content-search-overlay");
     addContentSearchOverlays(
       contentSearchVault,
       contentSearchResource,
@@ -245,6 +245,7 @@ function addContentSearchOverlays(
       canvas,
       configOptions,
       annotations,
+      "content-search-overlay",
     );
   }
 }
