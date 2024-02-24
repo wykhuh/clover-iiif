@@ -116,18 +116,16 @@ const Viewer: React.FC<ViewerProps> = ({
       );
       setPainting(painting);
     }
-
-    const resources = getAnnotationResources(vault, activeCanvas);
-
-    if (resources.length > 0) {
-      viewerDispatch({
-        type: "updateInformationOpen",
-        isInformationOpen: true,
-      });
-    }
-
-    setAnnotationResources(resources);
-    setIsInformationPanel(resources.length !== 0);
+    getAnnotationResources(vault, activeCanvas).then((resources) => {
+      if (resources.length > 0) {
+        viewerDispatch({
+          type: "updateInformationOpen",
+          isInformationOpen: true,
+        });
+      }
+      setAnnotationResources(resources);
+      setIsInformationPanel(resources.length !== 0);
+    });
   }, [activeCanvas, vault, viewerDispatch]);
 
   // make request to content search service using iiifContentSearch prop
