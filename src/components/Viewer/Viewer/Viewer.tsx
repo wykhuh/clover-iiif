@@ -100,10 +100,11 @@ const Viewer: React.FC<ViewerProps> = ({ manifest, theme }) => {
       );
       setPainting(painting);
     }
+    getAnnotationResources(vault, activeCanvas).then((annotationResources) => {
+      setAnnotationResources(annotationResources);
 
-    setAnnotationResources(getAnnotationResources(vault, activeCanvas));
-
-    setIsInformationPanel(annotationResources.length !== 0);
+      setIsInformationPanel(annotationResources.length !== 0);
+    });
   }, [activeCanvas, annotationResources.length, vault]);
 
   function renderPlugins(activeCanvas, openSeadragonViewer) {
