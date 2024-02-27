@@ -74,9 +74,11 @@ const OSD: React.FC<OSDProps> = ({
 
   const annotations: Array<AnnotationNormalized> = [];
 
-  annotationResources[0]?.items?.forEach((item) => {
-    const annotationResource = vault.get(item.id);
-    annotations.push(annotationResource as unknown as AnnotationNormalized);
+  annotationResources.forEach((annoResource) => {
+    annoResource?.items?.forEach((item) => {
+      const annotationResource = vault.get(item.id);
+      annotations.push(annotationResource as unknown as AnnotationNormalized);
+    });
   });
 
   useEffect(() => {
