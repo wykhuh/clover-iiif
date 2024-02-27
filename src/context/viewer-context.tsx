@@ -35,6 +35,7 @@ export type ViewerConfigOptions = {
     searchResultsLimit?: number;
   };
   ignoreCaptionLabels?: string[];
+  ignoreAnnotationOverlaysLabels?: string[];
   informationPanel?: {
     open?: boolean;
     renderAbout?: boolean;
@@ -84,6 +85,7 @@ const defaultConfigOptions = {
     searchResultsLimit: 20,
   },
   ignoreCaptionLabels: [],
+  ignoreAnnotationOverlaysLabels: [],
   informationPanel: {
     vtt: {
       autoScroll: {
