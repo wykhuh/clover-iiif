@@ -20,6 +20,7 @@ export type ViewerConfigOptions = {
   canvasBackgroundColor?: string;
   canvasHeight?: string;
   ignoreCaptionLabels?: string[];
+  ignoreAnnotationOverlaysLabels?: string[];
   informationPanel?: {
     open?: boolean;
     renderAbout?: boolean;
@@ -48,6 +49,7 @@ const defaultConfigOptions = {
   canvasBackgroundColor: "#6662",
   canvasHeight: "61.8vh",
   ignoreCaptionLabels: [],
+  ignoreAnnotationOverlaysLabels: [],
   informationPanel: {
     open: true,
     renderAbout: true,

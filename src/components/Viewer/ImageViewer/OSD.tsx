@@ -10,7 +10,6 @@ import {
   useViewerState,
   useViewerDispatch,
 } from "src/context/viewer-context";
-
 import Controls from "src/components/Viewer/ImageViewer/Controls";
 import { getInfoResponse } from "src/lib/iiif";
 import { v4 as uuidv4 } from "uuid";
@@ -20,6 +19,7 @@ import {
   type CanvasNormalized,
 } from "@iiif/presentation-3";
 import { AnnotationResources } from "src/types/annotations";
+import { parseAnnotationsFromAnnotationResources } from "src/lib/annotation-helpers";
 
 export type osdImageTypes = "tiledImage" | "simpleImage" | undefined;
 
@@ -72,14 +72,12 @@ const OSD: React.FC<OSDProps> = ({
     ajaxWithCredentials: configOptions.withCredentials,
   };
 
-  const annotations: Array<AnnotationNormalized> = [];
-
-  annotationResources.forEach((annoResource) => {
-    annoResource?.items?.forEach((item) => {
-      const annotationResource = vault.get(item.id);
-      annotations.push(annotationResource as unknown as AnnotationNormalized);
-    });
-  });
+  const annotations: Array<AnnotationNormalized> =
+    parseAnnotationsFromAnnotationResources(
+      annotationResources,
+      vault,
+      configOptions,
+    );
 
   useEffect(() => {
     if (uri !== osdUri) {
