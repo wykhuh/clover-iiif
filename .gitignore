@@ -2,7 +2,6 @@
 .build
 .next
 .vscode/
-dist
 node_modules
 out
 public/script.js
@@ -16,3 +15,5 @@ html/
 
 # VSCode
 .vscode/
+tmp
+dist/tsconfig.tsbuildinfo
