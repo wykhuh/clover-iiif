@@ -11,7 +11,7 @@ import { ViewerContextStore, useViewerState } from "src/context/viewer-context";
 import AnnotationPage from "src/components/Viewer/InformationPanel/Annotation/Page";
 import { AnnotationResources } from "src/types/annotations";
 import Information from "src/components/Viewer/InformationPanel/About/About";
-import { InternationalString } from "@iiif/presentation-3";
+import { InternationalString, CanvasNormalized } from "@iiif/presentation-3";
 import { Label } from "src/components/Primitives";
 
 interface NavigatorProps {
@@ -24,14 +24,40 @@ export const InformationPanel: React.FC<NavigatorProps> = ({
   annotationResources,
 }) => {
   const viewerState: ViewerContextStore = useViewerState();
-  const {
-    configOptions: { informationPanel },
-  } = viewerState;
+  const { vault, openSeadragonViewer, configOptions, plugins } = viewerState;
+  const { informationPanel } = configOptions;
 
   const [activeResource, setActiveResource] = useState<string>();
 
   const renderAbout = informationPanel?.renderAbout;
   const renderAnnotation = informationPanel?.renderAnnotation;
+
+  const canvas: CanvasNormalized = vault.get({
+    id: activeCanvas,
+    type: "Canvas",
+  });
+
+  const pluginsWithoutAnnotations = plugins.filter((plugin) => {
+    let match = false;
+    if (plugin.informationPanel?.annotationPageId === undefined) {
+      match = true;
+    }
+
+    return match;
+  });
+
+  function renderPluginInformationPanel(plugin) {
+    const PluginInformationPanel = plugin?.informationPanel
+      ?.component as unknown as React.ElementType;
+
+    return (
+      <PluginInformationPanel
+        canvas={canvas}
+        openSeadragonViewer={openSeadragonViewer}
+        configOptions={configOptions}
+      />
+    );
+  }
 
   useEffect(() => {
     if (renderAbout) {
@@ -68,6 +94,18 @@ export const InformationPanel: React.FC<NavigatorProps> = ({
               <Label label={resource.label as InternationalString} />
             </Trigger>
           ))}
+
+        {pluginsWithoutAnnotations &&
+          pluginsWithoutAnnotations.map((plugin, i) => (
+            <Trigger key={i} value={plugin.id}>
+              <Label
+                label={
+                  plugin.informationPanel?.label ||
+                  ({ none: [plugin.id] } as InternationalString)
+                }
+              />
+            </Trigger>
+          ))}
       </List>
       <Scroll>
         {renderAbout && (
@@ -85,6 +123,13 @@ export const InformationPanel: React.FC<NavigatorProps> = ({
               </Content>
             );
           })}
+
+        {pluginsWithoutAnnotations &&
+          pluginsWithoutAnnotations.map((plugin, i) => (
+            <Content key={i} value={plugin.id}>
+              {renderPluginInformationPanel(plugin)}
+            </Content>
+          ))}
       </Scroll>
     </Wrapper>
   );
