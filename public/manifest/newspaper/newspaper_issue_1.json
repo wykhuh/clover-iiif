@@ -76,6 +76,10 @@
               "target": "http://localhost:3000/manifest/newspaper/canvas/i1p1#xywh=1300,400,200,400"
             }
           ]
+        },
+        {
+          "id": "http://localhost:3000/api/annotations/1",
+          "type": "AnnotationPage"
         }
       ]
     },
@@ -115,22 +119,8 @@
       ],
       "annotations": [
         {
-          "id": "http://localhost:3000/manifest/newspaper/newspaper_issue_1-anno_p2.json",
-          "type": "AnnotationPage",
-          "items": [
-            {
-              "id": "http://localhost:3000/manifest/newspaper/newspaper_issue_1-anno_p2.json-1",
-              "type": "Annotation",
-              "motivation": "commenting",
-              "body": {
-                "type": "TextualBody",
-                "format": "text/plain",
-                "language": "en",
-                "value": "This is issue 1, page 2"
-              },
-              "target": "http://localhost:3000/manifest/newspaper/canvas/i1p2"
-            }
-          ]
+          "id": "http://localhost:3000/api/annotations/1",
+          "type": "AnnotationPage"
         }
       ]
     }
