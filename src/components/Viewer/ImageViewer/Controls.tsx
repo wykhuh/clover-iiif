@@ -2,6 +2,12 @@ import Button from "src/components/Viewer/ImageViewer/Button";
 import { Options } from "openseadragon";
 import React from "react";
 import { Wrapper } from "src/components/Viewer/ImageViewer/Controls.styled";
+import {
+  ViewerContextStore,
+  useViewerState,
+  useViewerDispatch,
+} from "src/context/viewer-context";
+import { CanvasNormalized } from "@iiif/presentation-3";
 
 const ZoomIn = () => {
   return (
@@ -66,6 +72,42 @@ const Controls = ({
   hasPlaceholder: boolean;
   options: Options;
 }) => {
+  const viewerState: ViewerContextStore = useViewerState();
+  const {
+    activeCanvas,
+    configOptions,
+    openSeadragonViewer,
+    plugins,
+    vault,
+    activeManifest,
+  } = viewerState;
+
+  const canvas: CanvasNormalized = vault.get({
+    id: activeCanvas,
+    type: "Canvas",
+  });
+
+  function renderPlugins() {
+    return plugins
+      .filter((plugin) => plugin.menu)
+      .map((plugin, i) => {
+        const PluginComponent = plugin.menu
+          ?.component as unknown as React.ElementType;
+        return (
+          <PluginComponent
+            key={i}
+            {...plugin?.menu?.componentProps}
+            activeManifest={activeManifest}
+            canvas={canvas}
+            viewerConfigOptions={configOptions}
+            openSeadragonViewer={openSeadragonViewer}
+            useViewerDispatch={useViewerDispatch}
+            useViewerState={useViewerState}
+          ></PluginComponent>
+        );
+      });
+  }
+
   return (
     <Wrapper
       data-testid="openseadragon-controls"
@@ -102,6 +144,7 @@ const Controls = ({
           <Reset />
         </Button>
       )}
+      {renderPlugins()}
     </Wrapper>
   );
 };
