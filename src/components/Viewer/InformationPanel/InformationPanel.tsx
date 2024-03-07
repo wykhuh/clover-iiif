@@ -6,7 +6,11 @@ import {
   Wrapper,
 } from "src/components/Viewer/InformationPanel/InformationPanel.styled";
 import React, { useEffect, useState } from "react";
-import { ViewerContextStore, useViewerState } from "src/context/viewer-context";
+import {
+  ViewerContextStore,
+  useViewerState,
+  useViewerDispatch,
+} from "src/context/viewer-context";
 
 import AnnotationPage from "src/components/Viewer/InformationPanel/Annotation/Page";
 import { AnnotationResources } from "src/types/annotations";
@@ -24,7 +28,8 @@ export const InformationPanel: React.FC<NavigatorProps> = ({
   annotationResources,
 }) => {
   const viewerState: ViewerContextStore = useViewerState();
-  const { vault, openSeadragonViewer, configOptions, plugins } = viewerState;
+  const { vault, openSeadragonViewer, configOptions, plugins, activeManifest } =
+    viewerState;
   const { informationPanel } = configOptions;
 
   const [activeResource, setActiveResource] = useState<string>();
@@ -39,7 +44,9 @@ export const InformationPanel: React.FC<NavigatorProps> = ({
 
   const pluginsWithoutAnnotations = plugins.filter((plugin) => {
     let match = false;
-    if (plugin.informationPanel?.annotationPageId === undefined) {
+    const annotationServer =
+      plugin.informationPanel?.componentProps?.annotationServer;
+    if (annotationServer === undefined) {
       match = true;
     }
 
@@ -47,14 +54,18 @@ export const InformationPanel: React.FC<NavigatorProps> = ({
   });
 
   function renderPluginInformationPanel(plugin) {
-    const PluginInformationPanel = plugin?.informationPanel
+    const PluginInformationPanelComponent = plugin?.informationPanel
       ?.component as unknown as React.ElementType;
 
     return (
-      <PluginInformationPanel
+      <PluginInformationPanelComponent
+        {...plugin?.componentProps}
+        activeManifest={activeManifest}
         canvas={canvas}
+        viewerConfigOptions={configOptions}
         openSeadragonViewer={openSeadragonViewer}
-        configOptions={configOptions}
+        useViewerDispatch={useViewerDispatch}
+        useViewerState={useViewerState}
       />
     );
   }

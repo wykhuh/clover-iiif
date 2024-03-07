@@ -4,6 +4,7 @@ import {
   ExternalResourceTypes,
   InternationalString,
   ManifestNormalized,
+  CanvasNormalized,
 } from "@iiif/presentation-3";
 import React, { useCallback, useEffect, useState } from "react";
 import {
@@ -70,6 +71,11 @@ const Viewer: React.FC<ViewerProps> = ({ manifest, theme }) => {
     [viewerDispatch],
   );
 
+  const canvas: CanvasNormalized = vault.get({
+    id: activeCanvas,
+    type: "Canvas",
+  });
+
   useEffect(() => {
     if (configOptions?.informationPanel?.open) {
       setInformationOpen(!isSmallViewport);
@@ -107,16 +113,20 @@ const Viewer: React.FC<ViewerProps> = ({ manifest, theme }) => {
     });
   }, [activeCanvas, annotationResources.length, vault]);
 
-  function renderPlugins(activeCanvas, openSeadragonViewer) {
+  function renderPlugins() {
     return plugins.map((plugin, i) => {
-      const Plugin = plugin.component as unknown as React.ElementType;
+      const PluginComponent = plugin.component as unknown as React.ElementType;
       return (
-        <Plugin
+        <PluginComponent
           key={i}
-          {...plugin.componentProps}
+          {...plugin?.componentProps}
+          activeManifest={manifest.id}
+          canvas={canvas}
+          viewerConfigOptions={configOptions}
           openSeadragonViewer={openSeadragonViewer}
-          activeCanvas={activeCanvas}
-        ></Plugin>
+          useViewerDispatch={useViewerDispatch}
+          useViewerState={useViewerState}
+        ></PluginComponent>
       );
     });
   }
@@ -138,9 +148,7 @@ const Viewer: React.FC<ViewerProps> = ({ manifest, theme }) => {
             manifestLabel={manifest.label as InternationalString}
             manifestId={manifest.id}
           />
-          {activeCanvas &&
-            openSeadragonViewer &&
-            renderPlugins(activeCanvas, openSeadragonViewer)}
+          {activeCanvas && openSeadragonViewer && renderPlugins()}
           <ViewerContent
             activeCanvas={activeCanvas}
             painting={painting}
