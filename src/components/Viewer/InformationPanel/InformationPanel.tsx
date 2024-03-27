@@ -24,7 +24,7 @@ import {
 } from "@iiif/presentation-3";
 import { Label } from "src/components/Primitives";
 import { setupPlugins, formatPluginAnnotations } from "src/lib/plugin-helpers";
-import ErrorFallback from "../Viewer/ErrorFallback";
+import ErrorFallback from "../../UI/ErrorFallback/ErrorFallback";
 
 import { ErrorBoundary } from "react-error-boundary";
 
