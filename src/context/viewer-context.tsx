@@ -139,7 +139,6 @@ export type PluginConfig = {
     component: React.ElementType;
     componentProps?: Record<string, unknown>;
     label: InternationalString;
-    displayIfNoAnnotations?: boolean;
   };
 };
 

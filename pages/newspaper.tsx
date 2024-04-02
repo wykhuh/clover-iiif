@@ -32,7 +32,6 @@ function Newspaper() {
             informationPanel: {
               component: InformationPanel,
               label: { none: ["my clip"] },
-              // displayIfNoAnnotations: false,
               componentProps: {
                 annotationServer: `${base_url}/api/annotations/1`,
                 token: "123abc",
