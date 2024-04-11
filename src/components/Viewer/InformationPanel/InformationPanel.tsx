@@ -83,14 +83,16 @@ export const InformationPanel: React.FC<NavigatorProps> = ({
       ?.component as unknown as React.ElementType;
 
     if (PluginInformationPanelComponent === undefined) {
-      return <></>;
+      return <>no component</>;
     }
 
+    console.log(">>><<");
     return (
       <Content key={i} value={plugin.id}>
         <ErrorBoundary FallbackComponent={ErrorFallback}>
           <PluginInformationPanelComponent
             {...plugin?.informationPanel?.componentProps}
+            data-testid="meeeeee"
             activeManifest={activeManifest}
             canvas={canvas}
             viewerConfigOptions={configOptions}
@@ -105,6 +107,11 @@ export const InformationPanel: React.FC<NavigatorProps> = ({
 
   useEffect(() => {
     if (activeResource) {
+      console.log("activeResource", activeResource);
+      console.log("renderAbout", renderAbout);
+      console.log("annotationResources", annotationResources);
+
+      console.log("renderContentSearch", renderContentSearch);
       return;
     } else if (renderContentSearch) {
       setActiveResource("manifest-content-search");

@@ -37,6 +37,26 @@ const AnnotationEditor: React.FC<PropType> = (props: PropType) => {
   useEffect(() => {
     if (!openSeadragonViewer) return;
 
+    // openSeadragonViewer.addHandler("tile-drawing", function () {
+    //   console.log("tile-drawing");
+    // });
+    // openSeadragonViewer.addHandler("tile-drawn", function () {
+    //   console.log("tile-drawn");
+    // });
+
+    // openSeadragonViewer.addHandler("update-tile", function () {
+    //   console.log("update-tile");
+    // });
+    openSeadragonViewer.addHandler("page", function () {
+      console.log("page");
+    });
+    openSeadragonViewer.addHandler("open", function () {
+      console.log("open");
+    });
+    // openSeadragonViewer.addHandler("tile-loaded", function () {
+    //   console.log("tile-loaded");
+    // });
+
     // set up Annotorious
     const options = {
       allowEmpty: true,

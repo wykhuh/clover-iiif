@@ -1,4 +1,5 @@
 import React, { useReducer } from "react";
+import { type ParsedAnnotationTarget } from "src/index";
 
 export type ConfigOptions = {
   [k: string]: any;
@@ -9,17 +10,20 @@ const defaultConfigOptions: ConfigOptions = {};
 export interface EditorContextStore {
   configOptions: ConfigOptions;
   clippingsUpdatedAt: string;
+  clippingsActiveTarget: ParsedAnnotationTarget;
 }
 
 interface EditorAction {
   type: string;
   configOptions: ConfigOptions;
   clippingsUpdatedAt: string;
+  clippingsActiveTarget: ParsedAnnotationTarget;
 }
 
 export const defaultState: EditorContextStore = {
   configOptions: defaultConfigOptions,
   clippingsUpdatedAt: "",
+  clippingsActiveTarget: "",
 };
 
 const EditorStateContext =
@@ -42,6 +46,12 @@ function EditorReducer(state: EditorContextStore, action: EditorAction) {
       return {
         ...state,
         clippingsUpdatedAt: action.clippingsUpdatedAt,
+      };
+    }
+    case "updateClippingsActiveTarget": {
+      return {
+        ...state,
+        clippingsActiveTarget: action.clippingsActiveTarget,
       };
     }
     default: {

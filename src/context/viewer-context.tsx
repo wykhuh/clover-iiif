@@ -136,6 +136,7 @@ export type PluginConfig = {
       component: React.ElementType;
       componentProps?: Record<string, unknown>;
     };
+    imageLoadedCallback?: () => void;
   };
   informationPanel?: {
     component: React.ElementType;

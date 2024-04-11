@@ -39,6 +39,7 @@ const Painting: React.FC<PaintingProps> = ({
     vault,
     viewerId,
     activeContentSearchTarget,
+    plugins,
   } = useViewerState();
   const dispatch: any = useViewerDispatch();
 
@@ -120,6 +121,7 @@ const Painting: React.FC<PaintingProps> = ({
   };
 
   const handleImageLoadedCallback = () => {
+    console.log("handleImageLoadedCallback");
     // zoom and pan to content search result
     if (activeContentSearchTarget) {
       panToTarget(
@@ -128,6 +130,18 @@ const Painting: React.FC<PaintingProps> = ({
         activeContentSearchTarget,
         canvas,
       );
+    }
+    if (plugins.length > 0) {
+      plugins.forEach((plugin) => {
+        if (plugin.imageViewer?.imageLoadedCallback) {
+          openSeadragonViewer;
+          configOptions;
+          activeContentSearchTarget;
+          canvas;
+          // debugger;
+          plugin.imageViewer.imageLoadedCallback();
+        }
+      });
     }
   };
 

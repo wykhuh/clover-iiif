@@ -5,6 +5,7 @@ import {
   parseAnnotationTarget,
   parseAnnotationsFromAnnotationResources,
   type AnnotationTargetExtended,
+  type ParsedAnnotationTarget,
 } from "src/lib/annotation-helpers";
 import { createOpenSeadragonRect } from "src/lib/openseadragon-helpers";
 import { type Plugin, type PluginInformationPanel } from "src/types/plugins";
@@ -19,6 +20,7 @@ export {
   createOpenSeadragonRect,
   type Plugin,
   type PluginInformationPanel,
+  type ParsedAnnotationTarget,
 };
 
 export default Viewer;

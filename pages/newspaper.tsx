@@ -14,52 +14,57 @@ function Demo() {
 }
 
 function Newspaper() {
+  return <EditorProvider>{renderViewer()}</EditorProvider>;
+}
+
+function renderViewer() {
   const base_url = "http://localhost:3000";
   return (
-    <EditorProvider>
-      <Viewer
-        iiifContent={`${base_url}/api/newspaper/collection`}
-        plugins={[
-          {
-            id: "AnnotationEditor",
-            imageViewer: {
-              menu: {
-                component: AnnotationEditor,
-                componentProps: {
-                  annotationServer: `${base_url}/api/annotationsByCanvas/1`,
-                  token: "123abc",
-                },
-              },
+    <Viewer
+      iiifContent={`${base_url}/api/newspaper/collection`}
+      plugins={[
+        {
+          id: "AnnotationEditor",
+          imageViewer: {
+            imageLoadedCallback: () => {
+              console.log("plugin imageLoadedCallback");
             },
-            informationPanel: {
-              component: InformationPanel,
-              label: { none: ["my clip"] },
+            menu: {
+              component: AnnotationEditor,
               componentProps: {
-                annotationServer: `${base_url}/api/annotations/1`,
+                annotationServer: `${base_url}/api/annotationsByCanvas/1`,
                 token: "123abc",
               },
             },
           },
-          {
-            id: "demo",
-            informationPanel: {
-              label: { none: ["My demo"] },
-              component: Demo,
+          informationPanel: {
+            component: InformationPanel,
+            label: { none: ["my clip"] },
+            componentProps: {
+              annotationServer: `${base_url}/api/annotations/1`,
+              token: "123abc",
             },
           },
-        ]}
-        options={{
-          // ignoreAnnotationOverlaysLabels: ["Clippings"],
-          informationPanel: { open: true },
-          canvasHeight: "640px",
-          openSeadragon: {
-            gestureSettingsMouse: {
-              scrollToZoom: true,
-            },
+        },
+        {
+          id: "demo",
+          informationPanel: {
+            label: { none: ["My demo"] },
+            component: Demo,
           },
-        }}
-      />
-    </EditorProvider>
+        },
+      ]}
+      options={{
+        // ignoreAnnotationOverlaysLabels: ["Clippings"],
+        informationPanel: { open: true },
+        canvasHeight: "640px",
+        openSeadragon: {
+          gestureSettingsMouse: {
+            scrollToZoom: true,
+          },
+        },
+      }}
+    />
   );
 }
 

@@ -5,6 +5,7 @@ import {
   AnnotationForAnnotorious,
   AnnotationBodyAnnotorious,
 } from "../types/annotation";
+import { parseAnnotationTarget, createOpenSeadragonRect } from "src/index";
 
 export async function saveAnnotation(
   webAnnotation: AnnotationFromAnnotorious,
@@ -315,4 +316,26 @@ export function convertIIIFAnnotationPageToWebAnnotations(
   });
 
   return webAnnotations;
+}
+
+export function panToTarget(
+  openSeadragonViewer,
+  configOptions,
+  target,
+  canvas,
+) {
+  const zoomLevel = configOptions.annotationOverlays?.zoomLevel || 1;
+
+  const parsedAnnotationTarget = parseAnnotationTarget(target);
+
+  const { point, rect, svg } = parsedAnnotationTarget;
+
+  if (point || rect || svg) {
+    const rect = createOpenSeadragonRect(
+      canvas,
+      parsedAnnotationTarget,
+      zoomLevel,
+    );
+    openSeadragonViewer?.viewport.fitBounds(rect);
+  }
 }

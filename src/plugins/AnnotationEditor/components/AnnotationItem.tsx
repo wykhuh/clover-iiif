@@ -9,6 +9,7 @@ import {
   AnnotationForEditor,
   AnnotationBodyForEditor,
 } from "../types/annotation";
+import { useEditorDispatch } from "../context/annotation-editor-context";
 
 interface PropType extends PluginInformationPanel {
   annotation: AnnotationForEditor;
@@ -28,27 +29,13 @@ const AnnotationItem: React.FC<PropType> = ({
   activeTarget,
 }) => {
   const dispatch: any = useViewerDispatch();
+  const editorDispatch: any = useEditorDispatch();
 
   // zoom to activeTarget when openSeadragonViewer changes
   useEffect(() => {
     if (!openSeadragonViewer) return;
     if (!annotation.target) return;
     if (annotation.target != activeTarget) return;
-    const zoomLevel = viewerConfigOptions.annotationOverlays?.zoomLevel || 1;
-
-    const parsedAnnotationTarget = parseAnnotationTarget(annotation.target);
-    const { rect, id } = parsedAnnotationTarget;
-
-    if (rect) {
-      if (canvas.id === id) {
-        const rect2 = createOpenSeadragonRect(
-          canvas,
-          parsedAnnotationTarget,
-          zoomLevel,
-        );
-        openSeadragonViewer?.viewport.fitBounds(rect2);
-      }
-    }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [openSeadragonViewer]);
@@ -77,7 +64,10 @@ const AnnotationItem: React.FC<PropType> = ({
           type: "updateActiveCanvas",
           canvasId: id,
         });
-
+        editorDispatch({
+          type: "updateClippingsActiveTarget",
+          clippingsActiveTarget: target,
+        });
         setActiveTarget(target);
       }
     }
@@ -123,3 +113,27 @@ const AnnotationItem: React.FC<PropType> = ({
 };
 
 export default AnnotationItem;
+
+export function panToTarget(
+  openSeadragonViewer,
+  viewerConfigOptions,
+  activeTarget,
+  canvas,
+) {
+  if (!openSeadragonViewer) return;
+  const zoomLevel = viewerConfigOptions.annotationOverlays?.zoomLevel || 1;
+
+  const parsedAnnotationTarget = parseAnnotationTarget(activeTarget);
+  const { rect, id } = parsedAnnotationTarget;
+
+  if (rect) {
+    if (canvas.id === id) {
+      const rect2 = createOpenSeadragonRect(
+        canvas,
+        parsedAnnotationTarget,
+        zoomLevel,
+      );
+      openSeadragonViewer?.viewport.fitBounds(rect2);
+    }
+  }
+}
