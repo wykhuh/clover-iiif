@@ -133,13 +133,26 @@ const Painting: React.FC<PaintingProps> = ({
     }
     if (plugins.length > 0) {
       plugins.forEach((plugin) => {
+        console.log(
+          "handleImageLoadedCallback context",
+          plugin.imageViewer?.context,
+        );
+
+        if (plugin.imageViewer?.context) {
+          const foo = plugin.imageViewer?.context?.clippingsActiveTarget;
+          debugger;
+        }
         if (plugin.imageViewer?.imageLoadedCallback) {
           openSeadragonViewer;
           configOptions;
           activeContentSearchTarget;
           canvas;
           // debugger;
-          plugin.imageViewer.imageLoadedCallback();
+          plugin.imageViewer.imageLoadedCallback(
+            openSeadragonViewer,
+            configOptions,
+            canvas,
+          );
         }
       });
     }

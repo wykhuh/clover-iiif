@@ -60,8 +60,6 @@ const ViewerContent: React.FC<ViewerContentProps> = ({
       !informationPanel.open) ||
     contentSearchResource;
 
-  console.log(isAside, isForcedAside);
-
   return (
     <Content
       className="clover-viewer-content"

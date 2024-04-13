@@ -64,6 +64,7 @@ const AnnotationItem: React.FC<PropType> = ({
           type: "updateActiveCanvas",
           canvasId: id,
         });
+        // debugger
         editorDispatch({
           type: "updateClippingsActiveTarget",
           clippingsActiveTarget: target,

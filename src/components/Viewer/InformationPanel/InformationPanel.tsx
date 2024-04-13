@@ -86,7 +86,6 @@ export const InformationPanel: React.FC<NavigatorProps> = ({
       return <>no component</>;
     }
 
-    console.log(">>><<");
     return (
       <Content key={i} value={plugin.id}>
         <ErrorBoundary FallbackComponent={ErrorFallback}>
@@ -107,11 +106,6 @@ export const InformationPanel: React.FC<NavigatorProps> = ({
 
   useEffect(() => {
     if (activeResource) {
-      console.log("activeResource", activeResource);
-      console.log("renderAbout", renderAbout);
-      console.log("annotationResources", annotationResources);
-
-      console.log("renderContentSearch", renderContentSearch);
       return;
     } else if (renderContentSearch) {
       setActiveResource("manifest-content-search");

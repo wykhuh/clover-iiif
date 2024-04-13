@@ -136,13 +136,14 @@ export type PluginConfig = {
       component: React.ElementType;
       componentProps?: Record<string, unknown>;
     };
-    imageLoadedCallback?: () => void;
+    imageLoadedCallback?: (openSeadragonViewer, configOptions, canvas) => void;
   };
   informationPanel?: {
     component: React.ElementType;
     componentProps?: Record<string, unknown>;
     label: InternationalString;
   };
+  context?: any;
 };
 
 export interface ViewerContextStore {

@@ -34,7 +34,7 @@ export const InfomationPanel: React.FC<PropType> = ({
   const [clippings, setClippings] = useState(annotations);
 
   const editorState = useEditorState();
-  const { clippingsUpdatedAt } = editorState;
+  const { clippingsUpdatedAt, clippingsActiveTarget } = editorState;
 
   // fetch clippings on page load. use plugin to fetch token since Clover isn't
   // set up to use tokens for the vault.get
@@ -77,6 +77,7 @@ export const InfomationPanel: React.FC<PropType> = ({
       <p>
         <a href="">View all clippings.</a>
       </p>
+      {JSON.stringify(clippingsActiveTarget)}
       <p>Clippings from this record</p>
       {clippings?.map((clipping) => (
         <AnnotationItem
