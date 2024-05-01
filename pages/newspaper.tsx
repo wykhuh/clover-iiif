@@ -33,6 +33,7 @@ function Newspaper() {
     <EditorProvider>
       <Viewer
         iiifContent={`${base_url}/api/fixtures/newspaper/issue_1`}
+        iiifContentSearchQuery={{ q: "Berliner" }}
         plugins={[
           {
             id: "AnnotationEditor",
@@ -66,7 +67,10 @@ function Newspaper() {
         ]}
         options={{
           // ignoreAnnotationOverlaysLabels: ["Clippings"],
-          informationPanel: { open: true },
+          informationPanel: {
+            open: true,
+            defaultTab: "manifest-content-search",
+          },
           canvasHeight: "640px",
           openSeadragon: {
             gestureSettingsMouse: {
