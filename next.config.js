@@ -1,5 +1,7 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { PHASE_DEVELOPMENT_SERVER } = require("next/constants");
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const withNextra = require("nextra")({
   theme: "nextra-theme-docs",
   themeConfig: "./theme.config.tsx",
@@ -13,6 +15,6 @@ module.exports = (phase) => {
     images: {
       unoptimized: true,
     },
-    output: "export",
+    // output: "export",
   });
 };
