@@ -3,7 +3,7 @@
 .next
 .tool-versions
 .vscode/
-dist
+# dist
 node_modules
 out
 public/script.js
