@@ -12,6 +12,8 @@ type Props = {
   annotationPage: AnnotationPageNormalized;
 };
 export const AnnotationPage: React.FC<Props> = ({ annotationPage }) => {
+  console.log("AnnotationPage mounted", annotationPage.id);
+
   const viewerState: ViewerContextStore = useViewerState();
   const { vault } = viewerState;
 

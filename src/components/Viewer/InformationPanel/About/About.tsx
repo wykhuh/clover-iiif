@@ -23,6 +23,7 @@ import { ViewerContextStore, useViewerState } from "src/context/viewer-context";
 import { PrimitivesExternalWebResource } from "src/types/primitives";
 
 const About: React.FC = () => {
+  console.log("About mounted");
   const viewerState: ViewerContextStore = useViewerState();
   const { activeManifest, vault } = viewerState;
 

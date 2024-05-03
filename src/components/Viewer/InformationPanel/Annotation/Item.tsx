@@ -19,6 +19,8 @@ type Props = {
 };
 
 export const AnnotationItem: React.FC<Props> = ({ annotation }) => {
+  console.log("AnnotationItem mounted", annotation.id);
+
   const { target } = annotation;
 
   const viewerState: ViewerContextStore = useViewerState();
